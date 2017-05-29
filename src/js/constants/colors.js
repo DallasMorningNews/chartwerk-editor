@@ -6,11 +6,6 @@ import _ from 'lodash';
  * We recommend you replicate the structure of categorical, sequential and
  * diverging schemes, as used at http://colorbrewer2.org.
  *
- * If you want to change that structure, the reducer for setting the scheme
- * (SET_COLOR_SCHEME) is written to expect an array at categorical.default.
- * You'll also need to rewrite parseSchemes in the ColorScheme component to
- * match your custom structure.
- *
  * The ColorPicker component is styled to fit an array of 8 colors.
  *
  */
@@ -124,7 +119,7 @@ const defaultColorScheme = {
 };
 
 /*
-Color schemes can be supplied in config object, but must have the minimum
+Color schemes can be supplied in template config object, but must have the minimum
 properties: a default categorical, diverging and sequential schemes.
 */
 const categoricalTest = _.hasIn(window.chartwerkConfig, 'color_schemes.categorical.default');
