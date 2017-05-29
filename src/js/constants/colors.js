@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 /**
  * Add your own color schemes here as nested arrays of hex color values.
  *
@@ -12,7 +14,7 @@
  * The ColorPicker component is styled to fit an array of 8 colors.
  *
  */
-export default {
+const defaultColorScheme = {
   categorical: {
     default: [
       '#329CEB',
@@ -120,6 +122,17 @@ export default {
     ],
   },
 };
+
+/*
+Color schemes can be supplied in config object, but must have the minimum
+properties: a default categorical, diverging and sequential schemes.
+*/
+const categoricalTest = _.hasIn(window.chartwerkConfig, 'color_schemes.categorical.default');
+const divergingTest = _.hasIn(window.chartwerkConfig, 'color_schemes.diverging');
+const sequentialTest = _.hasIn(window.chartwerkConfig, 'color_schemes.sequential');
+const requiredSchemes = categoricalTest && divergingTest && sequentialTest;
+
+export default requiredSchemes ? window.chartwerkConfig.color_schemes : defaultColorScheme;
 
 export const black = '#2d3035'; // Used as default color for annotation text
 export const white = '#ffffff';

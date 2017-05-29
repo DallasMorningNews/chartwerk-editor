@@ -78,7 +78,7 @@ export default React.createClass({
           onClick={this.copyVal}
           disabled={this.state.code === ''}
         >
-          Copy <i className="fa fa-clipboard" aria-hidden="true"></i>
+          Copy <i className="fa fa-clipboard" aria-hidden="true" />
         </button>
       </div>
     );

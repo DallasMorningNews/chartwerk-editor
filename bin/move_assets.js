@@ -9,7 +9,7 @@ const questions = [{
   message: 'Looks like you\'ve just installed chartwerk-editor. Would you like to move chartwerk-editor\'s bundled assets to your development directory using one of these schemes?',
   type: 'list',
   choices: [{
-    name: 'Django staticapp (see http://github.com/dallasmorningnews/)',
+    name: 'Django staticapp (see https://github.com/The-Politico/generator-politico-django)',
     value: 'django',
   }, {
     name: 'Root dist/ directory',
@@ -18,7 +18,7 @@ const questions = [{
     name: 'No, don\'t do anything.',
     value: 'kill',
   },
-],
+  ],
 }];
 
 if (!fs.existsSync('./installed')) {
@@ -36,7 +36,8 @@ if (!fs.existsSync('./installed')) {
     }
   });
 
-  fs.writeFile("./installed", "", function(err) {
-      if(err) { return console.log(err);}
+  fs.writeFile('./installed', '', (err) => {
+    if (err) return console.log(err);
+    return null;
   });
 }

@@ -3,13 +3,18 @@
   "rules": {
     "no-unsafe-finally": 0,
     "no-useless-computed-key": 0,
+    "react/forbid-prop-types": 0,
     "react/require-render-return": 0,
     "react/jsx-first-prop-new-line": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
     "no-console": 0,
     "react/prefer-es6-class": 0,
     "no-eval": 0,
     "react/jsx-no-bind": 0,
     "react/sort-comp": 0,
+  },
+  "env": {
+    "browser": true
   },
   "globals": {
     "$": false,

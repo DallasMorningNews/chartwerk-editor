@@ -25,10 +25,12 @@ export default React.createClass({
     actions.setRawData(data);
 
     const tsvConverter = new Converter({
-      delimiter: '	', // tab-delimited
+      delimiter: '	', // eslint-disable-line no-tabs
+      flatKeys: true,
     });
     const csvConverter = new Converter({
       delimiter: ',', // comma-delimited
+      flatKeys: true,
     });
 
     /**
@@ -50,7 +52,7 @@ export default React.createClass({
         this.setState({ format: 'JSON' });
       } catch (error) {
         // Try TSV
-        if (localData.indexOf('	') > -1) { // If tab in data...
+        if (localData.indexOf('	') > -1) { // eslint-disable-line no-tabs
           tsvConverter.fromString(localData);
         // CSV
         } else {
@@ -105,7 +107,7 @@ export default React.createClass({
           placeholder="Paste your data here with a header row."
           value={this.props.werk.ui.rawData}
           onChange={this.handleDataChange}
-        ></textarea>
+        />
         {success}
       </div>
     );

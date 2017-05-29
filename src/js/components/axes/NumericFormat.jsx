@@ -110,11 +110,8 @@ export default React.createClass({
    * @return {Array}            Parsed numeric values.
    */
   parseCustomTicks(tickString) {
-    const ticks = _.map(tickString.split(','), (d) => {
-      parseFloat(d);
-    });
-
-    return _.filter(ticks, (d) => !isNaN(d));
+    const ticks = _.map(tickString.split(','), d => parseFloat(d));
+    return _.filter(ticks, d => !isNaN(d));
   },
 
   /**
@@ -416,7 +413,6 @@ export default React.createClass({
             name="customTicks-single"
             type="text"
             placeholder="Comma-separated"
-            value=""
             className="form-control"
             value={this.state.singleCustomValue}
             onChange={this.setSingleCustom}
@@ -441,7 +437,6 @@ export default React.createClass({
             name="customTicks-double"
             type="text"
             placeholder="Comma-separated"
-            value=""
             className="form-control"
             value={this.state.doubleCustomValue}
             onChange={this.setDoubleCustom}

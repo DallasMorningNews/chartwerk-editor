@@ -1,16 +1,15 @@
 import React from 'react';
 import Modal from 'react-modal';
 import fetch from 'isomorphic-fetch';
-import { locations } from './../../misc/config';
+import inliner from 'svg-style-inliner';
+import _ from 'lodash';
 import html2canvas from 'html2canvas';
 import Cookies from 'js-cookie';
 import urljoin from 'url-join';
+import { locations } from './../../misc/config';
 import SimpleMDE from './MDEditor';
-import _ from 'lodash';
 import EmbedCode from './EmbedCode';
 import DatamapOpts from './DatamapOpts';
-import inliner from 'svg-style-inliner';
-
 
 export default React.createClass({
   propTypes: {
@@ -115,16 +114,14 @@ export default React.createClass({
     // {slug: 'some-tag', property: 'Some tag'}
     fetch(locations.templateTag)
       .then(
-        response => response.json()
-      )
+        response => response.json())
       .then(
-        data => {
+        (data) => {
           this.setState({ templateTags: data.map(d => ({
             slug: d.slug,
             property: d.property,
           })) });
-        }
-      );
+        });
 
     // For Django use, we intercept the csrf cookie and set
     // the header for AJAX requests
