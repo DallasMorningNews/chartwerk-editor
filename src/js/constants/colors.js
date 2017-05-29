@@ -9,7 +9,7 @@ import _ from 'lodash';
  * The ColorPicker component is styled to fit an array of 8 colors.
  *
  */
-const defaultColorScheme = {
+const defaultColorSchemes = {
   categorical: {
     default: [
       '#329CEB',
@@ -119,15 +119,26 @@ const defaultColorScheme = {
 };
 
 /*
-Color schemes can be supplied in template config object, but must have the minimum
-properties: a default categorical, diverging and sequential schemes.
+Color schemes can be supplied in template config object as a JSON string,
+but must have the minimum properties: a default categorical, diverging and
+sequential schemes.
 */
-const categoricalTest = _.hasIn(window.chartwerkConfig, 'color_schemes.categorical.default');
-const divergingTest = _.hasIn(window.chartwerkConfig, 'color_schemes.diverging');
-const sequentialTest = _.hasIn(window.chartwerkConfig, 'color_schemes.sequential');
-const requiredSchemes = categoricalTest && divergingTest && sequentialTest;
+const jsonify = (string) => {
+  try {
+    return JSON.parse(string);
+  } catch (e) {
+    return {};
+  }
+};
 
-export default requiredSchemes ? window.chartwerkConfig.color_schemes : defaultColorScheme;
+const customSchemes = _.hasIn(window.chartwerkConfig, 'color_schemes') ?
+  jsonify(window.chartwerkConfig.color_schemes) : {};
+
+const requiredSchemes = _.hasIn(customSchemes, 'categorical.default') &&
+  _.hasIn(customSchemes, 'diverging') &&
+  _.hasIn(customSchemes, 'sequential');
+
+export default requiredSchemes ? customSchemes : defaultColorSchemes;
 
 export const black = '#2d3035'; // Used as default color for annotation text
 export const white = '#ffffff';
