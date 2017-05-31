@@ -1,18 +1,15 @@
+import _ from 'lodash';
+
 /**
  * Add your own color schemes here as nested arrays of hex color values.
  *
  * We recommend you replicate the structure of categorical, sequential and
  * diverging schemes, as used at http://colorbrewer2.org.
  *
- * If you want to change that structure, the reducer for setting the scheme
- * (SET_COLOR_SCHEME) is written to expect an array at categorical.default.
- * You'll also need to rewrite parseSchemes in the ColorScheme component to
- * match your custom structure.
- *
  * The ColorPicker component is styled to fit an array of 8 colors.
  *
  */
-export default {
+const defaultColorSchemes = {
   categorical: {
     default: [
       '#329CEB',
@@ -120,6 +117,28 @@ export default {
     ],
   },
 };
+
+/*
+Color schemes can be supplied in template config object as a JSON string,
+but must have the minimum properties: a default categorical, diverging and
+sequential schemes.
+*/
+const jsonify = (string) => {
+  try {
+    return JSON.parse(string);
+  } catch (e) {
+    return {};
+  }
+};
+
+const customSchemes = _.hasIn(window.chartwerkConfig, 'color_schemes') ?
+  jsonify(window.chartwerkConfig.color_schemes) : {};
+
+const requiredSchemes = _.hasIn(customSchemes, 'categorical.default') &&
+  _.hasIn(customSchemes, 'diverging') &&
+  _.hasIn(customSchemes, 'sequential');
+
+export default requiredSchemes ? customSchemes : defaultColorSchemes;
 
 export const black = '#2d3035'; // Used as default color for annotation text
 export const white = '#ffffff';
