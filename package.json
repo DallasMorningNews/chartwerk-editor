@@ -9,8 +9,7 @@
   },
   "scripts": {
     "test": "mocha --compilers js:babel-register --recursive",
-    "test:watch": "npm test -- --watch",
-    "postinstall": "./bin/move_assets.js"
+    "test:watch": "npm test -- --watch"
   },
   "author": "",
   "license": "ISC",
