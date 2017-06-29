@@ -1,6 +1,6 @@
 {
   "name": "chartwerk-editor",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "repository": {
@@ -72,6 +72,7 @@
     "marked": "^0.3.5",
     "mocha": "^3.0.2",
     "moment": "^2.13.0",
+    "normalize-scss": "^7.0.0",
     "object-assign": "^4.0.1",
     "react": "^15.0.0",
     "react-ace": "^3.4.1",

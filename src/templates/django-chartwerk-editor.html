@@ -19,7 +19,7 @@
     template_api: "{{template_api}}",
     template_id: '{{template_id}}',
     template_tags_api: '{{template_tags_api}}',
-    oembed: '{{oembed}}',
+    oembed: {{oembed|yesno:"true,false"}},
     embed_src: '{{embed_src}}',
     color_schemes: '{{color_schemes|escapejs}}',
   };
