@@ -12,7 +12,7 @@
     "test:watch": "npm test -- --watch"
   },
   "author": "",
-  "license": "ISC",
+  "license": "AGPL-3.0",
   "dependencies": {
     "ace-builds": "^1.2.2",
     "asyncjs": "0.0.10",
