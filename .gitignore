@@ -38,3 +38,5 @@ jspm_packages
 
 # File used to divert post-install task
 installed
+
+.DS_Store
