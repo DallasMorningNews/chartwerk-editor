@@ -1,13 +1,13 @@
-#Chart template basics
+# Chart template basics
 
 This section will walk you through the basics of writing the code behind a chart template in Chartwerk.
 
-- [The "draw" function](#draw-function)
-- [The "helper" object](#helper-object)
-- [Chart styles](#chart-styles)
-- [Including dependencies](#dependencies)
-- [Ownership of annotations](#ownership-annotations)
-- [Best practices](#best-practices)
+* [The "draw" function](#draw-function)
+* [The "helper" object](#helper-object)
+* [Chart styles](#chart-styles)
+* [Including dependencies](#dependencies)
+* [Ownership of annotations](#ownership-annotations)
+* [Best practices](#best-practices)
 
 ### The "draw" function {#draw-function}
 
@@ -21,12 +21,11 @@ function draw(){
 }
 ```
 
-It will be called in the Editor everytime a user makes a selection in the Editor's UI. (It will also be called inline on the embeddable page, though only once.)
-
+The function will be called in the Editor every time a user makes a selection in the Editor's UI.
 
 ##### Idempotence
 
-Though the draw function is called multiple times in the Editor, it _does not necessarily_ need to be [idempotent](https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning), i.e., producing the same result no matter how many times called. Chartwerk presumes your chart function will only be called once in the embeddable page and tolerates multiple calls in the Editor by [removing all children](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/misc/api.js#L67-L74) of the `#chart` container before each call, basically giving you a blank slate each time.
+Though the draw function is called multiple times in the Editor, it _does not necessarily_ need to be [idempotent](https://en.wikipedia.org/wiki/Idempotence#Computer_science_meaning), i.e., producing the same result no matter how many times called. Chartwerk presumes your chart function will only be called once in the embeddable page and tolerates multiple calls in the Editor by [removing all children](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/misc/api.js#L67-L74) of the `#chart` preview container before each call, basically giving you a blank slate each time.
 
 ### The "helper" object {#helper-object}
 
@@ -34,7 +33,7 @@ Often, it's helpful to move boilerplate code you know won't change away from cod
 
 Chartwerk gives you a space to define an object with helpful methods to do rudimentary tasks like parse data or define scales and axes.
 
-For example, you might have a helper object like this: 
+For example, you might have a helper object like this:
 
 ```javascript
 var werkHelper = {
@@ -58,35 +57,43 @@ function draw() {
 
 See the Best Practices section on passing data to and from the helper object for a real example of a typical exchange between the draw function and helper object.
 
-
 ### Chart styles {#chart-styles}
 
-TK.
+You can write any CSS you need in the Editor to style your chart. Those styles will be inlined in the embeddable page.
+
+Since your chart will be embedded via an iframe, you generally don't need to worry about class name collisions, but it's beneficial in the Editor to prefix styles with the container element of the chart preview \`\#chart\`.
 
 ### Including dependencies {#dependencies}
 
-TK.
+<img src="./img/screenshots/dependencies.png" class="screenshot" />
+
+On the `Code` tab of the editor, you can inject any third-party scripts or stylesheets you need to draw your chart. Just add them by a CDN link or any link you host yourself.
+
+Stylesheets and scripts are injected in the order shown in the Editor, preceding styles or scripts written directly in the template.
+
+One common practice is to develop parts of your template code into standalone libraries, for example, methods you would otherwise hang on the `helper` object.
 
 ### Ownership of annotations {#ownership-annotations}
 
-Chartwerk assumes ownership of many parts of the annotation layer for charts. 
+Chartwerk assumes ownership of many parts of the annotation layer for charts.
 
- Specfically, Chartwerk handles:
-- Color legends
-- Free annotations
-- The headline
-- Chatter
-- Footnote
-- Source line
-- Author/attribution line
+Specifically, Chartwerk handles:
 
-The rendering scripts for these features are built into the Editor preview. 
+* Color legends
+* Free annotations
+* The headline
+* Chatter
+* Footnote
+* Source line
+* Author/attribution line
 
-A separate script, `client.bundle.js`, will render [these](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/client/legend.js) [text](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/client/annotations.js) [elements](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/client/text.js) in the embeddable page and should be inlined on that page by the backend app. 
+The rendering scripts for these features are built into the Editor preview.
+
+A separate script, `client.bundle.js`, will render [these](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/client/legend.js) [text](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/client/annotations.js) [elements](https://github.com/DallasMorningNews/chartwerk-editor/blob/master/src/js/client/text.js) in the embeddable page and should be inlined on that page by the backend app.
 
 ### Best practices {#best-practices}
 
-#### Writing template code to accomodate arbitrary user data.
+#### Writing template code to accommodate arbitrary user data.
 
 Chart templates should anticipate any data users can throw at them without relying on set header names in the data schema.
 
@@ -146,10 +153,9 @@ circles
     .attr("r", 5)
     .attr("cx", function(d){ return d.x; })
     .attr("cy", function(d){ return d.y; });
-
 ```
-The different properties in the datamap API can be used to create template code for dozens of chart types that can handle any arbitrary tabular data. Read those [API docs](/docs/api/datamap.md)!
 
+The different properties in the datamap API can be used to create template code for dozens of chart types that can handle any arbitrary tabular data. Read those [API docs](/docs/api/datamap.md)!
 
 #### Writing template code to handle both chart sizes
 
@@ -170,16 +176,15 @@ var dims = {
 d3.select("#chart").append("svg")
   .attr("width", dims[chartwerk.ui.size].width)
   .attr("height", dims[chartwerk.ui.size].height);
-
 ```
 
-The above code will now work regardless of which chart size is active. 
+The above code will now work regardless of which chart size is active.
 
-(Switching the `chartwerk.ui.size` property is also how Chartwerk's backend bakes out each chart size, so it's important your template's code responds to it.)
+\(Switching the `chartwerk.ui.size` property is also how Chartwerk's backend bakes out each chart size, so it's important your template's code responds to it.\)
 
 #### Working with the helper object
 
-In most cases, we use the helper object to do parsing tasks we need before we can begin to draw a chart, for example setting up SVG axes or defining scales in d3.js. Relegating these tasks to helper object methods keeps our draw function cleaner and its code more explicitly tied to actually drawing SVG elements. 
+In most cases, we use the helper object to do parsing tasks we need before we can begin to draw a chart, for example setting up SVG axes or defining scales in d3.js. Relegating these tasks to helper object methods keeps our draw function cleaner and its code more explicitly tied to actually drawing SVG elements.
 
 Most of these helper methods can be performed in sequence once and then the data handed back to the draw function. To do this easily, we often write the helper object with a single method that calls all others, like the `build` method below:
 
@@ -188,13 +193,13 @@ var werkHelper = {
   parse: function(werk) {
     // ...
   },
-  
+
   scales: function (werk) {
     // ...
   },
-  
+
   // etc.
-  
+
   build: function(werk) {
     this.parse(werk);
     this.scales(werk);
@@ -238,7 +243,7 @@ var werkHelper = {
       x: d3.timeParse( chartwerk.axes.base.dateFormat ),
       y: function(d){ return +d; }
     };
-    
+
     // Now use those parsers to create a new array of data objects
     // which have properties x & y.
     // * Checkout the datamap API section if datamap.base/value are confusing.
@@ -248,9 +253,9 @@ var werkHelper = {
         y: werk.parsers.y(d[chartwerk.datamap.value[0]])
       };
     })
-        
+
   },
-  
+
   // Method that defines d3 scales for both axes in our chart
   scales: function(werk) {
     // Get the max dimensions of the chart, based on which
@@ -262,7 +267,7 @@ var werkHelper = {
     // Get the extents (min/max) of the X & Y data. 
     var xExtent = d3.extent(werk.data, function(d) { return d.x; }),
         yExtent = d3.extent(werk.data, function(d) { return d.y; });
-      
+
     // Define scales and hang them on the werk object.
     werk.scales = {
       x: d3.scaleTime()
@@ -273,7 +278,7 @@ var werkHelper = {
           .range([h, 0])
     };
   },
-  
+
   // Build function that calls each of the above methods
   build: function(werk) {
     this.parse(werk);
@@ -375,3 +380,6 @@ werk.axes.x.ticks(
     dateTick.every( chartwerk.axes.base.format[s].frequency )
 );
 ```
+
+
+
