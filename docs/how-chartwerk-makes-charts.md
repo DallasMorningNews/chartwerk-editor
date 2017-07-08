@@ -4,15 +4,11 @@ Each chart in Chartwerk starts with a dataset and ends with a chart drawn from a
 
 ### How data becomes a chart
 
-The following diagram represents the basic flow of from tabular data to chart:
+The following diagram represents the basic flow from tabular data to chart:
 
-<br/>
 
 <img src="./img/how-chartwerk-makes-charts.png" class="screenshot" />
 
-<br/>
-
-#### Steps
 
 1. A user supplies tabular data to the Chartwerk Editor. This step presumes the user has already determined which chart type she wants to make and the Editor is preloaded with that chart template.
 2. User makes selections in the Editor that determine how different features of this chart should be formatted, for example, axes and labels.
