@@ -7,4 +7,4 @@ This repository contains the chart editor. For the deployable Chartwerk app, see
 
 See a demo of the editor [here](http://dallasmorningnews.github.io/chartwerk-editor/).
 
-Documentation hosted [here](https://hobbes7878.gitbooks.io/chartwerk-editor/content/docs/introduction.html).
+Documentation hosted [on gitbook](https://the-dallas-morning-news.gitbooks.io/chartwerk-editor/content/docs/introduction.html).
