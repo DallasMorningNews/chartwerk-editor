@@ -4,13 +4,13 @@ Each chart in Chartwerk starts with a dataset and ends with a chart drawn from a
 
 ### How data becomes a chart
 
-The following diagram represents the basic flow of how Chartwerk turns tabular data into a chart.
+The following diagram represents the basic flow of from tabular data to chart:
 
-<br/><br/>
+<br/>
 
 <img src="./img/how-chartwerk-makes-charts.png" class="screenshot" />
 
-<br/><br/>
+<br/>
 
 #### Steps
 
@@ -22,7 +22,7 @@ The following diagram represents the basic flow of how Chartwerk turns tabular d
 
 ### Ownership of tasks in Chartwerk
 
-- **Users** supply data and use the Editor's UI to specify chart formatting. 
+- **Users** supply data and use the Editor's UI to specify chart format options. 
 
 - **The Editor** turns user selections into an API.
 
