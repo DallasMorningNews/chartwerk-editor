@@ -35,8 +35,47 @@ The roots of each of these endpoints are provided to chartwerk-editor as [contex
 - `chart_api` - RESTful API root endpoint for charts
 - `template_api` - RESTful API root endpoint for templates
 - `template_tags_api` - RESTful API root endpoint for template tags
-- `oembed` - RESTful API root endpoint for oEmbeds or a blank string
+- `oembed` - Boolean whether to return an oEmbed URL to user as embed code.
 - `embed_src` - URL for [parent page embed script](embedding.md#parent-embed).
+- `color_schemes` - JavaScript object of color schemes. If this object is empty, chartwerk-editor will us a default color scheme.
+
+#### color_schemes
+
+Color schemes should specify keys for categorical, sequential and diverging scheme collections. Categorical must include a scheme called `default`. All other schemes can be called whatever you like. Format them like this:
+
+```javascript
+{
+  categorical: {
+    default: [
+          '#AAAAAA',
+          '#BBB',
+          // etc.
+      ],
+  },
+  sequential: {
+      reds: [
+          '#FF0000',
+          '#8B0000',
+          // etc.
+      ],
+      blues: [
+          '#0000FF',
+          '#000080',
+          // etc.
+      ],
+  },
+  diverging: {
+      redBlue: [
+          '#FF0000',
+          '#0000FF',
+          // etc.
+      ],
+  },
+}
+```
+
+
+
 
 ### Baking Chartwerk charts {#baking}
 
@@ -67,4 +106,4 @@ var chartwerk = {{werk.data|jsonify}};
 </script>
 ```
 
-\* `jsonify` simply dumps JSON using Python's standard module
+\* `jsonify` is a custom template filter that simply dumps JSON using Python's standard module
