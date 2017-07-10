@@ -1,6 +1,6 @@
 # Integrating chartwerk-editor with a backend
 
-chartwerk-editor is simply an interface for creating and editing charts and templates. It needs a backend, which manages the logic of saving and storing charts and templates, managing user charts and baking charts as flat files to AWS or another hosting service, among other important functions.
+Chartwerk-editor is simply an interface for creating and editing charts and templates. It needs a backend, which manages the logic of saving and storing charts and templates, managing user charts and baking charts as flat files to AWS or another hosting service, among other important functions.
 
 These docs are not meant to be an exhaustive guide to how to build a backend for Chartwerk. They simply explain the basic assumptions chartwerk-editor makes about the backend and what it does.
 
@@ -12,7 +12,7 @@ We'll make mention of [django-chartwerk](https://github.com/DallasMorningNews/dj
 
 ### Backend API {#api}
 
-chartwerk-editor presumes your backend provides a RESTful API. Specifically, you'll need endpoints for charts, templates and template tags. For example:
+Chartwerk-editor presumes your backend provides a RESTful API. Specifically, you'll need endpoints for charts, templates and template tags. For example:
 
 Charts
 > `api/charts/<chart ID>/`
