@@ -1,8 +1,8 @@
 {
   "name": "chartwerk-editor",
-  "version": "0.0.3",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "React/Redux chart template editor.",
+  "main": "src/js/app.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/DallasMorningNews/chartwerk-editor.git"
@@ -11,7 +11,20 @@
     "test": "mocha --compilers js:babel-register --recursive",
     "test:watch": "npm test -- --watch"
   },
-  "author": "",
+  "author": {
+    "name": "Jon McClure",
+    "email": "jon.r.mcclure@gmail.com"
+  },
+  "contributors": [{
+    "name": "Andrew Chavez",
+    "email": "adchavez@gmail.com"
+  }],
+  "keywords": [
+    "charts",
+    "dataviz",
+    "react",
+    "redux"
+  ],
   "license": "AGPL-3.0",
   "dependencies": {
     "ace-builds": "^1.2.2",
