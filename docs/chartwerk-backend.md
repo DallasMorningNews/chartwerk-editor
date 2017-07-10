@@ -4,7 +4,7 @@ chartwerk-editor is simply an interface for creating and editing charts and temp
 
 These docs are not meant to be an exhaustive guide to how to build a backend for Chartwerk. They simply explain the basic assumptions chartwerk-editor makes about the backend and what it does.
 
-We'll make mention of [django-chartwerk](), a Django-based backend for Chartwerk, in a couple places by way of example, not as a way to describe how the backend _must_ behave.
+We'll make mention of [django-chartwerk](https://github.com/DallasMorningNews/django-chartwerk/), a Django-based backend for Chartwerk, in a couple places by way of example, not as a way to describe how the backend _must_ behave.
 
 - [Backend API](#api)
 - [Context supplied to chartwerk-editor](#context)
@@ -25,7 +25,7 @@ Template tags
 
 The roots of each of these endpoints are provided to chartwerk-editor as [context](#context).
 
-[django-chartwerk]() utilizes the excellent django REST framework to provide a full API for Chartwerk charts and templates.
+[Django-chartwerk](https://github.com/DallasMorningNews/django-chartwerk/) utilizes the excellent [Django REST Framework](http://www.django-rest-framework.org/) to provide a full API for Chartwerk charts and templates.
 
 ### Context supplied to chartwerk-editor {#context}
 
@@ -85,9 +85,9 @@ By "baking," we just mean the process of creating a single HTML page that includ
 
 The backend is responsible for creating that page and uploading it to your preferred file storage.
 
-In django-chartwerk, we do this via a post-save signal on the chart model, using celery to complete the task asynchronously. We also inline as many of the styles and dependency scripts as possible to reduce the number of separate HTTP calls a chart must make before rendering.
+In django-chartwerk, we do this via a post-save signal on the chart model, using [Celery](http://www.celeryproject.org/) to complete the task asynchronously. We also inline as many of the styles and dependency scripts as possible to reduce the number of separate HTTP calls a chart must make before rendering.
 
-The chart scripts themselves are also inlined. A `chartwerk` global object is created which the draw function ingests. In that way, a chart is rendered in the baked page almost identically as it is rendered in chartwerk-editor.
+The chart scripts themselves are also inlined. A `chartwerk` global object is created which the draw function ingests. In that way, a chart is rendered in the baked page almost identically as it is rendered in chartwerk-editor for previewing.
 
 Here's an example from django-chartwerk (using Django's templating syntax) of how we bake a chart's scripts into a single script tag:
 
