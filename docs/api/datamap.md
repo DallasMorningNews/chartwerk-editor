@@ -171,96 +171,136 @@ The following are some examples of the datamap API applied to different chart ty
 
 A 2-column dataset of percent of executive jobs held by women by company.
 
-- `Company` -> base axis
-- `Percent women` -> value axis
+| Column   | Classification |
+|----------|----------------|
+| `Company`   | base axis |
+| `Percent women`    | value axis |
+
 
 #### Unit chart
 
 A 2-column dataset of leading causes of death among 100 teens.
 
-- `Cause of death` -> scale axis (color of each block)
-- `Number of dead` -> value axis
+| Column   | Classification |
+|----------|----------------|
+| `Cause of death` | scale axis (color of each block) |
+| `Number of dead`    | value axis |
+
 
 #### Line chart
 
 A 2-column dataset of company production rates over time.
 
-- `Date` -> base axis
-- `Production` -> value axis / data series
+| Column | Classification |
+|----------|----------------|
+| `Date` | base axis |
+| `Production` | value axis / data series |
 
 #### Multi-line chart
 
 A 3-column dataset of company stock prices over time.
 
-- `Date` -> base axis
-- `Company A` -> data series
-- `Company B` -> data series
+| Column | Classification |
+|----------|----------------|
+| `Date` | base axis |
+| `Company A` | data series |
+| `Company B` | data series |
+
 
 #### Faceted multi-line chart
 
 A 4-column dataset of company stock prices over time by industry.
 
-- `Date` -> base axis
-- `Company A` -> data series
-- `Company B` -> data series
-- `Industry` -> faceting column
+| Column | Classification |
+|----------|----------------|
+| `Date` | base axis |
+| `Company A` | data series |
+| `Company B` | data series |
+| `Industry` | faceting column |
+
 
 #### Grouped bar chart
 
 A 4-column dataset of recidivism rates by inmate risk category by county.
 
-- `County` - base axis
-- `Low risk` - data series
-- `Medium risk` - data series
-- `High risk` - data series
+| Column | Classification |
+|----------|----------------|
+| `County` | base axis |
+| `Low risk` | data series |
+| `Medium risk` | data series |
+| `High risk` | data series |
+
 
 #### Scatterplot chart
 
 A 4-column dataset of state SAT scores.
 
-- `Student testing rate` -> base axis
-- `SAT score` -> value axis
-- `Student poverty rate` -> scale axis
-- `State name` -> custom column 'tooltip'
+| Column | Classification |
+|----------|----------------|
+| `Student testing rate` | base axis |
+| `SAT score` | value axis |
+| `Student poverty rate` | scale axis |
+| `State name` | tooltip (custom classification) |
+
 
 #### Boxplots
 
 A 3-column dataset of medical [utilization rates](https://www.cms.gov/research-statistics-data-and-systems/statistics-trends-and-reports/medicare-provider-charge-data/physician-and-other-supplier.html) by doctor by practice specialty.
 
-- `specialty` -> base axis
-- `utilization rate` -> value axis
-- `doctor NPI` -> ignored column
+| Column | Classification |
+|----------|----------------|
+| `Specialty` | base axis |
+| `Utilization rate` | value axis |
+| `Doctor NPI` | ignored column |
+
 
 #### Polar line chart
 
 A 3-column dataset comparing two players performance stats.
 
-- `Performance dimension` -> base axis
-- `Player A` -> data series
-- `Player B` -> data series
+| Column | Classification |
+|----------|----------------|
+| `Performance dimension` | base axis |
+| `Player A` | data series |
+| `Player B` | data series |
+
 
 #### Choropleth maps
 
 A 2-column dataset of infant mortality rates by state.
 
-- `State` -> base axis
-- `Mortality rate` -> scale axis
+| Column | Classification |
+|----------|----------------|
+| `State` | base axis |
+| `Mortality rate` | scale axis |
+
 
 A 2-column dataset of states who voted for each political party.
 
-- `State` -> base axis
-- `Republican or Democrat` -> scale axis
+| Column | Classification |
+|----------|----------------|
+| `State` | base axis |
+| `Republican or Democrat` | scale axis |
+
 
 #### Dot maps
 
 A 3-column dataset of minority population growth rates by city.
 
-- `Longitude` -> base axis
-- `Latitude` -> value axis
-- `Population growth` -> scale axis
+| Column | Classification |
+|----------|----------------|
+| `Longitude` | base axis |
+| `Latitude` | value axis |
+| `Population growth` | scale axis |
+
+
 
 A 3-column dataset of cities that are above or below an EPA smog threshold.
 
-- `Longitude` -> base axis
-- `Latitude` -> value axis
-- `Above or below` -> scale axis
+| Column | Classification |
+|----------|----------------|
+| `Longitude` | base axis |
+| `Latitude` | value axis |
+| `Above or below` | scale axis |
+
+
