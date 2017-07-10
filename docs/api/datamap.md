@@ -1,6 +1,6 @@
 # chartwerk.datamap
 
-The datamap contains classifications of the columns in a user's data. This branch of the API drives what controls are presented to a chart creator in the editor and much of the rest of the API. That makes the datamap the most critical part of the API to understand.
+The datamap contains classifications of the columns in a user's data. This branch of the API drives what controls are presented to a chart creator in the editor and much of the rest of the API. That makes the datamap **the most critical part of the API to understand.**
 
 - [Data classification grammar](#data-classification) 
 - [Default classifications](#default)
@@ -19,13 +19,17 @@ The datamap contains classifications of the columns in a user's data. This branc
 
 #### Data classification grammar {#data-classification}
 
-Because of the many types of data schema Chartwerk has to parse while creating charts it's necessary to have a scheme that defines the relationship between data schema and chart.
+Because of the many types of data Chartwerk has to parse while creating charts it's necessary to have terms that define the relationship between the data schema and a chart.
 
 Most common dataviz terms don't bridge that gap. For example, describing data columns as traditional X and Y axes is tied too closely to the hard rules of a chart's coordinate plane. What happens when we want to use the same logic in terms of X & Y axes to draw both a horizontal and a vertical bar chart?
 
-Chartwerk introduces a coarse, high-level grammar to describe tabular (i.e., spreadsheet) data schema in terms that represent a column-wise mapping to the dimensions of a chart. For example, the grammar may describe which columns in the data schema are responsible for determining the position of chart elements and which determine their color.
+Chartwerk introduces a new coarse, high-level grammar to describe tabular data schema in terms that represent a column-by-column mapping to the dimensions of a chart. For example, the grammar may describe which columns in the data schema are responsible for determining the position of chart elements and which determine their color.
 
-In practice, users classify the columns of the raw data they paste into the editor using the grammar's terms. While the terms are necessarily abstract from the perspective of template developers, in the editor, the classifications can be aliased to terms more familiar to chart creators. Once a user classifies the columns in their data, the editor renders the appropriate controls to specify other chart features, like the appropriate color scale and axes properties.
+The grammar represents the structure of the data, but also drives what additional options are appropriate for the data. Once a user classifies the columns in their data, the Editor renders the appropriate controls to specify other chart features, like the appropriate color scale and axes properties. 
+
+The core classifications of the grammar are called "axes" because each represents a discrete vector within which the data vary, like color or position.
+
+Users classify the columns of the raw data they paste into the Editor using the grammar's terms. But while the terms are necessarily abstract from the perspective of template developers, in the Editor, the classifications can be aliased to more familiar terms.
 
 There are six data classifications built in to Chartwerk. Template developers can also add custom data classifications for individual templates.
 
