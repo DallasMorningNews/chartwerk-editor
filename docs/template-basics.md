@@ -182,6 +182,12 @@ The above code will now work regardless of which chart size is active.
 
 \(Switching the `chartwerk.ui.size` property is also how Chartwerk's backend bakes out each chart size, so it's important your template's code responds to it.\)
 
+##### A note on responsive charts
+
+Chartwerk is opinionated on chart sizes, choosing adaptive over strictly responsive charts. We make that choice for a number of reasons, but given the flexibility Chartwerk allows you in writing chart templates and customizing your embed code, there are paths to writing truly responsive templates. Those paths may complicate some Chartwerk features - things like free annotations and axis tick formatting are built around set sizes.
+
+That said, we think it's worth asking whether you need the flexibility and the headache of managing every point difference in the relatively modest width range of your content well. We've found that two sizes with adaptive styles handsomely accommodate all the devices our readers consume our charts on.
+
 #### Working with the helper object
 
 In most cases, we use the helper object to do parsing tasks we need before we can begin to draw a chart, for example setting up SVG axes or defining scales in d3.js. Relegating these tasks to helper object methods keeps our draw function cleaner and its code more explicitly tied to actually drawing SVG elements.
