@@ -99,7 +99,7 @@ Chart templates should anticipate any data users can throw at them without relyi
 
 You can use the [datamap API](/docs/api/datamap.md) to write templates that are agnostic to how your user's data is formatted.
 
-Take some user data about fatality rates at different ages for a scatterplot that, after parseing, looks like this:
+Take some user data about fatality rates at different ages for a scatterplot that, after parsing, looks like this:
 
 ```javascript
 [
@@ -116,7 +116,7 @@ Take some user data about fatality rates at different ages for a scatterplot tha
 
 Obviously, writing template code with explicit calls to the `age` and `fatality` properties is a bad idea for reusability.
 
-Instead, we could recast our data to have predictable properties like `x` and `y` that will make our template code abstractable across any arbitrary data scheme.
+Instead, we could recast our data to have predictable properties like `x` and `y` that will make our template code abstractable across any arbitrary data schema.
 
 So how do we know which property in the original user data belongs to `x` and which to `y`?
 
@@ -131,7 +131,7 @@ chartwerk.datamap.value
 // 'fatality'
 ```
 
-Putting it all together, we can accomodate any arbitrary user data using a pattern like this:
+Putting it all together, we can accommodate any arbitrary user data using a pattern like this:
 
 ```javascript
 // Recast data as an array of objects with predictable properties.
@@ -171,11 +171,12 @@ var dims = {
   double: { width: 540, height: 250}
 };
 
-// Now in your template access the appropriate property
-// by the size key.
+// Pull out size from chartwerk's API
+var s = chartwerk.ui.size;
+// Now use it to access correct properties!
 d3.select("#chart").append("svg")
-  .attr("width", dims[chartwerk.ui.size].width)
-  .attr("height", dims[chartwerk.ui.size].height);
+  .attr("width", dims[s].width)
+  .attr("height", dims[s].height);
 ```
 
 The above code will now work regardless of which chart size is active.
@@ -190,7 +191,7 @@ That said, we think it's worth asking whether you need the flexibility and the h
 
 #### Working with the helper object
 
-In most cases, we use the helper object to do parsing tasks we need before we can begin to draw a chart, for example setting up SVG axes or defining scales in d3.js. Relegating these tasks to helper object methods keeps our draw function cleaner and its code more explicitly tied to actually drawing SVG elements.
+In most cases, we use the helper object to do parsing tasks we need before we can begin to draw a chart, for example setting up SVG axes or defining scales in d3.js. Relegating these tasks to helper object methods keeps our draw function cleaner and its code more explicitly tied to actually drawing chart elements.
 
 Most of these helper methods can be performed in sequence once and then the data handed back to the draw function. To do this easily, we often write the helper object with a single method that calls all others, like the `build` method below:
 
