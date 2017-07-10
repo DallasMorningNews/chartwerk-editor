@@ -75,16 +75,25 @@ Take, for example, these two table schemas:
 
 ##### Crosstab
 
+_Schema:_
+
 | Date     | Male | Female |
 |----------|------|--------|
 | 01/01/16 | 22   | 24     |
 | 02/01/16 | 26   | 32     |
 
-- `Date` -> base axis
-- `Male` -> data series
-- `Female` -> data series
+_Classification:_
+
+| Column   | Classification |
+|----------|----------------|
+| `Date`   | base axis      |
+| `Male`   | data series    |
+| `Female` | data series    |
+
 
 ##### Flat table schema
+
+_Schema:_
 
 | Date     | Gender | Age |
 |----------|--------|-----|
@@ -93,9 +102,14 @@ Take, for example, these two table schemas:
 | 01/01/16 | Male   | 22  |
 | 02/01/16 | Male   | 26  |
 
-- `Date` -> base axis
-- `Gender` -> scale axis
-- `Age` -> value axis
+_Classification:_
+
+| Column   | Classification |
+|----------|----------------|
+| `Date`   | base axis |
+| `Gender` | scale axis |
+| `Age`    | value axis |
+
 
 In the crosstab, the `Male` and `Female` columns will represent both a color and a position, whereas in the flat table, `Gender` is a scale axis and `Age`, a value axis.
 
