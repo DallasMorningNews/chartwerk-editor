@@ -169,7 +169,11 @@ The following are some examples of the datamap API applied to different chart ty
 
 #### Bar chart
 
+_Schema:_
+
 A 2-column dataset of percent of executive jobs held by women by company.
+
+_Classification:_
 
 | Column   | Classification |
 |----------|----------------|
@@ -179,7 +183,11 @@ A 2-column dataset of percent of executive jobs held by women by company.
 
 #### Unit chart
 
+_Schema:_
+
 A 2-column dataset of leading causes of death among 100 teens.
+
+_Classification:_
 
 | Column   | Classification |
 |----------|----------------|
@@ -189,7 +197,11 @@ A 2-column dataset of leading causes of death among 100 teens.
 
 #### Line chart
 
+_Schema:_
+
 A 2-column dataset of company production rates over time.
+
+_Classification:_
 
 | Column | Classification |
 |----------|----------------|
@@ -198,7 +210,11 @@ A 2-column dataset of company production rates over time.
 
 #### Multi-line chart
 
+_Schema:_
+
 A 3-column dataset of company stock prices over time.
+
+_Classification:_
 
 | Column | Classification |
 |----------|----------------|
@@ -209,7 +225,11 @@ A 3-column dataset of company stock prices over time.
 
 #### Faceted multi-line chart
 
+_Schema:_
+
 A 4-column dataset of company stock prices over time by industry.
+
+_Classification:_
 
 | Column | Classification |
 |----------|----------------|
@@ -221,7 +241,11 @@ A 4-column dataset of company stock prices over time by industry.
 
 #### Grouped bar chart
 
+_Schema:_
+
 A 4-column dataset of recidivism rates by inmate risk category by county.
+
+_Classification:_
 
 | Column | Classification |
 |----------|----------------|
@@ -233,7 +257,11 @@ A 4-column dataset of recidivism rates by inmate risk category by county.
 
 #### Scatterplot chart
 
+_Schema:_
+
 A 4-column dataset of state SAT scores.
+
+_Classification:_
 
 | Column | Classification |
 |----------|----------------|
@@ -245,7 +273,11 @@ A 4-column dataset of state SAT scores.
 
 #### Boxplots
 
+_Schema:_
+
 A 3-column dataset of medical [utilization rates](https://www.cms.gov/research-statistics-data-and-systems/statistics-trends-and-reports/medicare-provider-charge-data/physician-and-other-supplier.html) by doctor by practice specialty.
+
+_Classification:_
 
 | Column | Classification |
 |----------|----------------|
@@ -256,7 +288,11 @@ A 3-column dataset of medical [utilization rates](https://www.cms.gov/research-s
 
 #### Polar line chart
 
+_Schema:_
+
 A 3-column dataset comparing two players performance stats.
+
+_Classification:_
 
 | Column | Classification |
 |----------|----------------|
@@ -267,7 +303,11 @@ A 3-column dataset comparing two players performance stats.
 
 #### Choropleth maps
 
+_Schema:_
+
 A 2-column dataset of infant mortality rates by state.
+
+_Classification:_
 
 | Column | Classification |
 |----------|----------------|
@@ -275,7 +315,11 @@ A 2-column dataset of infant mortality rates by state.
 | `Mortality rate` | scale axis |
 
 
+_Schema:_
+
 A 2-column dataset of states who voted for each political party.
+
+_Classification:_
 
 | Column | Classification |
 |----------|----------------|
@@ -285,7 +329,11 @@ A 2-column dataset of states who voted for each political party.
 
 #### Dot maps
 
+_Schema:_
+
 A 3-column dataset of minority population growth rates by city.
+
+_Classification:_
 
 | Column | Classification |
 |----------|----------------|
@@ -295,7 +343,11 @@ A 3-column dataset of minority population growth rates by city.
 
 
 
+_Schema:_
+
 A 3-column dataset of cities that are above or below an EPA smog threshold.
+
+_Classification:_
 
 | Column | Classification |
 |----------|----------------|
