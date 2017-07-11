@@ -27,14 +27,14 @@ export default React.createClass({
   getEmbedCode(size) {
     const werk = this.props.werk;
 
-    const code = window.chartwerkConfig.oembed ?
-    `<div
-      class="chartwerk"
-      data-id="${window.chartwerkConfig.chart_id}"
-      data-embed="${JSON.stringify(werk.embed.dimensions).replace(/"/g, '&quot;')}"
-      data-size="${size}">
-    </div>
-    <script src="${window.chartwerkConfig.embed_src}"></script>` : this.props.location;
+    const code = window.chartwerkConfig.oembed ? this.props.location :
+      `<div
+        class="chartwerk"
+        data-id="${window.chartwerkConfig.chart_id}"
+        data-embed="${JSON.stringify(werk.embed.dimensions).replace(/"/g, '&quot;')}"
+        data-size="${size}">
+      </div>
+      <script src="${window.chartwerkConfig.embed_src}"></script>`;
 
     this.setState({
       code: code
