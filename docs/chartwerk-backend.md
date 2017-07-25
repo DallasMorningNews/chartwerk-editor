@@ -20,6 +20,9 @@ Charts
 Templates
 > `api/templates/<template ID>/`
 
+Embed codes
+> `api/embeds/<chart ID>/`
+
 Template tags
 > `api/template-tags/<template tag ID>/`
 
@@ -34,9 +37,9 @@ The roots of each of these endpoints are provided to chartwerk-editor as [contex
 - `template_id` - Template ID
 - `chart_api` - RESTful API root endpoint for charts
 - `template_api` - RESTful API root endpoint for templates
+- `embed_api` - RESTful API root endpoint for embed codes
 - `template_tags_api` - RESTful API root endpoint for template tags
 - `oembed` - Boolean whether to return an oEmbed URL to user as embed code.
-- `embed_src` - URL for [parent page embed script](embedding.md#parent-embed).
 - `color_schemes` - JavaScript object of color schemes. If this object is empty, chartwerk-editor will us a default color scheme.
 
 #### color_schemes

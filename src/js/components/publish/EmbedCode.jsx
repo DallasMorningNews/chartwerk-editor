@@ -1,5 +1,9 @@
+require('es6-promise').polyfill();
+
+import fetch from 'isomorphic-fetch';
 import React from 'react';
 import copy from 'copy-to-clipboard';
+import urljoin from 'url-join';
 
 export default React.createClass({
   propTypes: {
@@ -24,26 +28,38 @@ export default React.createClass({
     }, 2000);
   },
 
+  /**
+   * Returns an embed code from the server, or returns the URL
+   * of the current chart if oEmbed is configured.
+   * @param  {string} size Preferred size of the chart, which
+   *                       is only used for embed codes.
+   * @return {null}
+   */
   getEmbedCode(size) {
-    const werk = this.props.werk;
+    const dewhite = code => code.replace(/[\t\n]/g, '') // Remove whitespaces from HTML...
+                                .replace(/\s{2}/g, ' ')
+                                .replace(/\s{2}/g, ' ')
+                                .replace(/\s{2}/g, ' ')
+                                .replace(/> </g, '><');
+    const embedEndpoint = `${urljoin(
+      window.chartwerkConfig.embed_api,
+      window.chartwerkConfig.chart_id)}/?size=${size}`;
 
-    const code = window.chartwerkConfig.oembed ? this.props.location :
-      `<div
-        class="chartwerk"
-        data-id="${window.chartwerkConfig.chart_id}"
-        data-embed="${JSON.stringify(werk.embed.dimensions).replace(/"/g, '&quot;')}"
-        data-size="${size}">
-      </div>
-      <script src="${window.chartwerkConfig.embed_src}"></script>`;
-
-    this.setState({
-      code: code
-        .replace(/[\t\n]/g, '') // Remove whitespaces from HTML...
-        .replace(/\s{2}/g, ' ')
-        .replace(/\s{2}/g, ' ')
-        .replace(/\s{2}/g, ' ')
-        .replace(/> </g, '><'),
-    });
+    if (window.chartwerkConfig.oembed) {
+      this.setState({
+        code: this.props.location,
+      });
+    } else {
+      fetch(embedEndpoint)
+        .then(
+          response => response.json())
+        .then(
+          (response) => {
+            this.setState({
+              code: dewhite(response.embed_code),
+            });
+          });
+    }
   },
 
   render() {
