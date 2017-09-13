@@ -29,8 +29,7 @@ export default React.createClass({
     if (
         !_.isEqual(
             _.keys(this.props.werk.data[0]).sort(), // Old props
-            _.keys(nextProps.werk.data[0]).sort() // New props
-        )
+            _.keys(nextProps.werk.data[0]).sort()) // New props
     ) {
       if (this.props.werk.axes.color.byFacet) {
         this.props.actions.colorByFacet();
@@ -56,9 +55,8 @@ export default React.createClass({
     }));
 
     // Helper to get index of opt object
-    const getOptIndex = (classification) => _.indexOf(
-      opts, _.find(opts, { value: classification })
-    );
+    const getOptIndex = classification => _.indexOf(
+      opts, _.find(opts, { value: classification }));
 
     /**
      * DISABLING OPTIONS
@@ -126,8 +124,7 @@ export default React.createClass({
     setDisabled('series',
       (datamap.value && datamap.scale) ||
       (datamap.value && datamap.value !== column) ||
-      (datamap.scale && datamap.scale !== column)
-    );
+      (datamap.scale && datamap.scale !== column));
 
     return opts;
   },
@@ -253,7 +250,7 @@ export default React.createClass({
     const werk = this.props.werk;
     const actions = this.props.actions;
 
-    const scaleArray = werk.data.map((d) => d[scaleColumn]);
+    const scaleArray = werk.data.map(d => d[scaleColumn]);
     if (!scaleArray.some(isNaN)) {
       actions.setQuantizeColumn(scaleColumn);
       actions.setQuantize();
@@ -291,7 +288,7 @@ export default React.createClass({
     const column = werk.datamap.scale && !werk.axes.color.quantize ?
       werk.datamap.scale : werk.datamap.facet;
     // Ternary prevents ColorPicker being initialized on an array with undefined members.
-    const groups = column ? _.uniq(werk.data.map((datum) => datum[column])) : [];
+    const groups = column ? _.uniq(werk.data.map(datum => datum[column])) : [];
     groups.sort();
 
     if (groups.length > 8) {
@@ -307,7 +304,7 @@ export default React.createClass({
     const selects = groups.map((group, i) =>
         (<tr key={i}>
           <td>
-              {ellipsize(group, 8)}
+            {ellipsize(group, 8)}
           </td>
           <td>
             <ColorPicker
@@ -316,8 +313,7 @@ export default React.createClass({
               actions={this.props.actions}
             />
           </td>
-        </tr>)
-    );
+        </tr>));
 
     return (
       <div>
@@ -339,23 +335,6 @@ export default React.createClass({
     const werk = this.props.werk;
     const actions = this.props.actions;
 
-    const modalStyles = {
-      overlay: {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: 'rgba(255, 255, 255, 0.65)',
-        zIndex: 9,
-      },
-      content: {
-        maxWidth: '800px',
-        margin: 'auto',
-        backgroundColor: 'white',
-      },
-    };
-
     const classifySelects = _.keys(werk.data[0]).map((column, i) => {
       let addOption;
       let article = 'a';
@@ -368,28 +347,27 @@ export default React.createClass({
            */
           addOption = !werk.datamap.scale ||
             werk.axes.color.ignoreScale ?
-            <ColorPicker
-              column={column}
-              werk={werk}
-              actions={actions}
-            /> : null;
+              (<ColorPicker
+                column={column}
+                werk={werk}
+                actions={actions}
+              />) : null;
           break;
         case 'series':
           addOption = !werk.axes.color.byFacet &&
             !werk.axes.color.quantize ?
-            <ColorPicker
-              column={column}
-              werk={werk}
-              actions={actions}
-            />
-            : null;
+              (<ColorPicker
+                column={column}
+                werk={werk}
+                actions={actions}
+              />) : null;
           break;
         case 'facet':
           addOption = (
             <label>
               <input type="checkbox" value="" onChange={this.colorFacetSwitch} />
-              <i className="fa fa-square-o"></i>
-              <i className="fa fa-check-square-o"></i> Color by facet?
+              <i className="fa fa-square-o" />
+              <i className="fa fa-check-square-o" /> Color by facet?
             </label>
           );
           break;
@@ -401,8 +379,8 @@ export default React.createClass({
                 onChange={() => this.changeIgnoreScale()}
                 checked={werk.axes.color.ignoreScale}
               />
-              <i className="fa fa-square-o"></i>
-              <i className="fa fa-check-square-o"></i> Scale by size, not color?
+              <i className="fa fa-square-o" />
+              <i className="fa fa-check-square-o" /> Scale by size, not color?
             </label>
           );
           break;
@@ -480,7 +458,7 @@ export default React.createClass({
           <h4>
             <a onClick={this.changeTab} href="">
               <b>Next:</b> Axes
-              <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+              <i className="fa fa-arrow-circle-o-right" aria-hidden="true" />
             </a>
           </h4>
         </div>
@@ -488,5 +466,4 @@ export default React.createClass({
 
     );
   },
-
 });
