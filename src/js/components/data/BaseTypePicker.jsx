@@ -24,8 +24,7 @@ export default React.createClass({
         moment(
           werk.data[0][base],
           _.map(datetime, 'moment'), // An array of datetime formats
-          true
-        ).isValid()
+          true).isValid()
       ) {
         return 'date';
       }
@@ -39,14 +38,12 @@ export default React.createClass({
     }
 
     return {
-      type: werk.axes.base.type || typeSniffer.bind(this)(),
+      type: werk.axes.base.type || typeSniffer(),
     };
   },
 
   componentDidMount() {
-    this.props.actions.setBaseType(
-      this.state.type
-    );
+    this.props.actions.setBaseType(this.state.type);
 
     if (this.state.type === 'date') {
       this.setDateFormat();
@@ -57,7 +54,7 @@ export default React.createClass({
   /**
    * Sniff for date format using moment.js.
    * @param  {Boolean} force  Whether to force dateSniffing. Used to avoid
-   *                          	setState race conditions, e.g., setDateFormat.
+   *                          setState race conditions, e.g., setDateFormat.
    * @return {Integer} i      Index of object in datetime array.
    */
   dateSniffer(force = false) {
@@ -81,19 +78,18 @@ export default React.createClass({
     function rowCheck(format) {
       let stillValid = true;
       let rowI = 0;
-      while (stillValid && rowI < this.props.werk.data.length) {
+      while (stillValid && rowI < werk.data.length) {
         stillValid = moment(
-          this.props.werk.data[rowI][base],
+          werk.data[rowI][base],
           format,
-          true
-        ).isValid();
+          true).isValid();
         rowI++;
       }
       return stillValid;
     }
 
     while (!valid && i <= momentFormats.length) {
-      valid = rowCheck.bind(this)(momentFormats[i]);
+      valid = rowCheck(momentFormats[i]);
       i = valid ? i : i + 1;
     }
 
@@ -107,8 +103,7 @@ export default React.createClass({
   setDateFormat() {
     const i = this.dateSniffer(true);
     this.props.actions.setDateFormat(
-      _.map(datetime, 'd3')[i]
-    );
+      _.map(datetime, 'd3')[i]);
   },
 
   changeType(e) {
@@ -147,7 +142,7 @@ export default React.createClass({
           Dates parsed with format {_.map(datetime, 'human')[i]}.
         </div>
       );
-    } else if (werk.axes.base.type === 'date') {
+    } else if (this.state.type === 'date') {
       dateLabel = (
         <div className="dateformat error">
           Error parsing dates!

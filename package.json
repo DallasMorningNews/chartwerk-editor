@@ -1,6 +1,6 @@
 {
   "name": "chartwerk-editor",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "React/Redux chart template editor.",
   "main": "src/js/app.js",
   "repository": {
@@ -15,10 +15,12 @@
     "name": "Jon McClure",
     "email": "jon.r.mcclure@gmail.com"
   },
-  "contributors": [{
-    "name": "Andrew Chavez",
-    "email": "adchavez@gmail.com"
-  }],
+  "contributors": [
+    {
+      "name": "Andrew Chavez",
+      "email": "adchavez@gmail.com"
+    }
+  ],
   "keywords": [
     "charts",
     "dataviz",
@@ -84,6 +86,7 @@
     "marked": "^0.3.5",
     "mocha": "^3.0.2",
     "moment": "^2.13.0",
+    "node-sass": "^4.5.3",
     "normalize-scss": "^7.0.0",
     "object-assign": "^4.0.1",
     "react": "^15.0.0",
