@@ -8,11 +8,6 @@ export default React.createClass({
     werk: React.PropTypes.object,
   },
 
-  getInitialState() {
-    return {
-      activeOpts: 'single',
-    };
-  },
 
   render() {
     const werk = this.props.werk;
@@ -22,14 +17,14 @@ export default React.createClass({
       return null;
     }
 
-    const options = werk.text.legend[this.state.activeOpts].inside ? (
+    const options = werk.text.legend[werk.ui.size].inside ? (
       <div id="legend-inside-opts">
         <button type="button"
-          className={werk.text.legend[this.state.activeOpts].background ?
+          className={werk.text.legend[werk.ui.size].background ?
             'btn btn-sm btn-secondary active' : 'btn btn-sm btn-secondary'
           }
           title="Background"
-          onClick={() => actions.changeLegendBackground(this.state.activeOpts)}
+          onClick={() => actions.changeLegendBackground(werk.ui.size)}
         >
           BG
         </button>
@@ -37,22 +32,22 @@ export default React.createClass({
     ) : (
       <div id="legend-inside-opts">
         <button type="button"
-          className={werk.text.legend[this.state.activeOpts].align === 'l' ?
+          className={werk.text.legend[werk.ui.size].align === 'l' ?
             'btn btn-sm btn-secondary active' : 'btn btn-sm btn-secondary'
           }
           title="Align legend container left"
-          onClick={() => actions.changeLegendAlign(this.state.activeOpts, 'l')}
+          onClick={() => actions.changeLegendAlign(werk.ui.size, 'l')}
         >
-          <i className="fa fa-align-left" aria-hidden="true"></i>
+          <i className="fa fa-align-left" aria-hidden="true" />
         </button>
         <button type="button"
-          className={werk.text.legend[this.state.activeOpts].align === 'r' ?
+          className={werk.text.legend[werk.ui.size].align === 'r' ?
             'btn btn-sm btn-secondary active' : 'btn btn-sm btn-secondary'
           }
           title="Align legend container right"
-          onClick={() => actions.changeLegendAlign(this.state.activeOpts, 'r')}
+          onClick={() => actions.changeLegendAlign(werk.ui.size, 'r')}
         >
-          <i className="fa fa-align-right" aria-hidden="true"></i>
+          <i className="fa fa-align-right" aria-hidden="true" />
         </button>
       </div>
     );
@@ -69,7 +64,7 @@ export default React.createClass({
           maxLength="50"
           placeholder="Legend title"
           value={werk.text.legend.title}
-          onChange={(e) => actions.changeLegendTitle(e.target.value)}
+          onChange={e => actions.changeLegendTitle(e.target.value)}
         />
         <h5>Display options</h5>
         <small>Set display options for single and double-column chart sizes independently.
@@ -78,23 +73,23 @@ export default React.createClass({
           <img
             src={`${window.chartwerkConfig.static_prefix}img/icons/singleColumn.png`}
             title="Single-wide"
-            className={this.state.activeOpts === 'single' ? 'active' : 'inactive'}
-            onClick={() => this.setState({ activeOpts: 'single' })}
+            className={werk.ui.size === 'single' ? 'active' : 'inactive'}
+            onClick={() => actions.changePreview('single')}
             alt="Single-wide"
           />
           <img
             src={`${window.chartwerkConfig.static_prefix}img/icons/doubleColumn.png`}
             title="Double-wide"
-            className={this.state.activeOpts === 'single' ? 'inactive' : 'active'}
-            onClick={() => this.setState({ activeOpts: 'double' })}
+            className={werk.ui.size === 'single' ? 'inactive' : 'active'}
+            onClick={() => actions.changePreview('double')}
             alt="Double-wide"
           />
           <button type="button"
-            className={werk.text.legend[this.state.activeOpts].inside ?
+            className={werk.text.legend[werk.ui.size].inside ?
               'btn btn-sm btn-secondary active' : 'btn btn-sm btn-secondary'
             }
             title="Legend inside the chart space?"
-            onClick={() => actions.changeLegendInside(this.state.activeOpts)}
+            onClick={() => actions.changeLegendInside(werk.ui.size)}
           >
             Inside
           </button>

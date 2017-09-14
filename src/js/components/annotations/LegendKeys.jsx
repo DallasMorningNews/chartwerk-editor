@@ -28,9 +28,8 @@ export default React.createClass({
     if (
       // If the color scheme changes.
       !_.isEqual(
-        werk.text.legend.keys.map((key) => key.color).slice().sort(),
-        werk.axes.color.range.slice().sort()
-      )
+        werk.text.legend.keys.map(key => key.color).slice().sort(),
+        werk.axes.color.range.slice().sort())
     ) {
       // Default values for text are blank...
       const defaultText = werk.axes.color.range.map(() => '');
@@ -40,9 +39,8 @@ export default React.createClass({
       if (werk.axes.color.quantize) {
         // Always one less domain member as range in quantize scale. So need
         // to get the min of the dataset first.
-        defaultText[0] = _.min(werk.data.map((datum) =>
-          datum[werk.axes.color.quantizeProps.column]
-        )).toString();
+        defaultText[0] = _.min(werk.data.map(datum =>
+          datum[werk.axes.color.quantizeProps.column])).toString();
 
         // Now set rest of thresholds as default text.
         werk.axes.color.domain.map((limit, i) => {
@@ -71,6 +69,7 @@ export default React.createClass({
 
   render() {
     const werk = this.props.werk;
+    const color = werk.axes.color;
     const actions = this.props.actions;
 
     if (!werk.text.legend.active) {
@@ -79,40 +78,41 @@ export default React.createClass({
 
     const keySet = werk.text.legend.keys.map((key, i) =>
       (
-      <div className="legend-key" key={i}>
-        <div
-          className="color-square"
-          style={{ backgroundColor: key.color }}
-        ></div>
-        <input
-          className="form-control"
-          type="text"
-          maxLength="50"
-          value={key.text}
-          placeholder="Text to display"
-          onChange={(e) => actions.changeLegendKey(i, key.color, e.target.value)}
-        />
-        <div className="key-sort">
-          <i
-            className={`fa fa-caret-up ${i === 0 ||
-              werk.axes.color.quantize ? 'disabled' : ''}`}
-            aria-hidden="true"
-            title="Reorder"
-            onClick={() => actions.changeLegendKeyOrderUp(i)}
-          ></i>
-          <i
-            className={`fa fa-caret-down ${
-              i === werk.text.legend.keys.length - 1 ||
-              werk.axes.color.quantize ? 'disabled' : ''
-            }`}
-            aria-hidden="true"
-            title="Reorder"
-            onClick={() => actions.changeLegendKeyOrderDown(i)}
-          ></i>
+        <div className="legend-key" key={i}>
+          <div
+            className="color-square"
+            style={{ backgroundColor: key.color }}
+          />
+          <input
+            className="form-control"
+            type="text"
+            maxLength="50"
+            value={key.text}
+            placeholder={color.domain[
+              color.range.indexOf(key.color)
+            ]}
+            onChange={e => actions.changeLegendKey(i, key.color, e.target.value)}
+          />
+          <div className="key-sort">
+            <i
+              className={`fa fa-caret-up ${i === 0 ||
+                werk.axes.color.quantize ? 'disabled' : ''}`}
+              aria-hidden="true"
+              title="Reorder"
+              onClick={() => actions.changeLegendKeyOrderUp(i)}
+            />
+            <i
+              className={`fa fa-caret-down ${
+                i === werk.text.legend.keys.length - 1 ||
+                werk.axes.color.quantize ? 'disabled' : ''
+              }`}
+              aria-hidden="true"
+              title="Reorder"
+              onClick={() => actions.changeLegendKeyOrderDown(i)}
+            />
+          </div>
         </div>
-      </div>
-      )
-    );
+      ));
 
     return (
       <div id="legend-keys">
