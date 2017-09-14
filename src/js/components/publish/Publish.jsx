@@ -372,19 +372,16 @@ export default React.createClass({
     const selector = this.state.screenshotChatter ? '#chartwerk' : '#chart';
     // Inline all styles before taking screenshot.
     inliner($('#chartwerk #chart')[0]);
-    html2canvas($(selector),
-      {
-        onrendered(canvas) {
-          const a = document.createElement('a');
-          a.href = canvas
-            .toDataURL('image/jpeg')
-            .replace('image/jpeg', 'image/octet-stream');
-          a.download = 'chartwerk.jpg';
-          a.click();
-          a.remove();
-        },
-      }
-    );
+    html2canvas($(selector)[0]).then((canvas) => {
+      console.log('HI');
+      const a = document.createElement('a');
+      a.href = canvas
+        .toDataURL('image/jpeg')
+        .replace('image/jpeg', 'image/octet-stream');
+      a.download = 'chartwerk.jpg';
+      a.click();
+      a.remove();
+    });
   },
 
   render() {
