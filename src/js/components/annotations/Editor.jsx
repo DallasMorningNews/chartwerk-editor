@@ -72,7 +72,7 @@ export default React.createClass({
       const sX = e.pageX;
       const sY = e.pageY;
 
-      $(document).on('mousemove.drag', dragEvent => {
+      $(document).on('mousemove.drag', (dragEvent) => {
         dragEvent.stopPropagation();
         x = Math.max(Math.min(oX + (dragEvent.pageX - sX), chartWidth - width), 0);
         y = Math.max(Math.min(oY + (dragEvent.pageY - sY), chartHeight - height), 0);
@@ -189,6 +189,7 @@ export default React.createClass({
             onClick={() => {
               actions.changeAnnotationSize(i, 's');
               this.focusNote(i);
+              actions.changePreview('single');
             }}
             alt="Single-wide"
           />
@@ -199,6 +200,7 @@ export default React.createClass({
             onClick={() => {
               actions.changeAnnotationSize(i, 'd');
               this.focusNote(i);
+              actions.changePreview('double');
             }}
             alt="Double-wide"
           />
@@ -208,47 +210,77 @@ export default React.createClass({
             type="text"
             className="form-control annotation-text"
             placeholder="Text here"
-            onChange={(e) => actions.changeAnnotationText(i, e.target.value)}
+            onChange={e => actions.changeAnnotationText(i, e.target.value)}
             onFocus={() => this.focusNote(i)}
             value={d.text}
           />
-          <i className="fa fa-times"
+          <i
+            className="fa fa-times"
             onClick={() => actions.removeAnnotation(i)}
             title="Remove"
-          ></i>
+            role="button"
+            tabIndex={0}
+          />
         </div>
         <div className="annotation-formats">
           <div className="btn-group" role="group" aria-label="Alignment">
-            <button type="button" className="btn btn-sm btn-secondary" title="Align left"
+            <button
+              type="button"
+              className="btn btn-sm btn-secondary"
+              title="Align left"
               onClick={() => actions.changeAnnotationAlign(i, 'l')}
             >
-              <i className="fa fa-align-left" aria-hidden="true"></i>
+              <i
+                className="fa fa-align-left"
+                aria-hidden="true"
+              />
             </button>
-            <button type="button" className="btn btn-sm btn-secondary" title="Align center"
+            <button
+              type="button"
+              className="btn btn-sm btn-secondary"
+              title="Align center"
               onClick={() => actions.changeAnnotationAlign(i, 'c')}
             >
-              <i className="fa fa-align-center" aria-hidden="true"></i>
+              <i
+                className="fa fa-align-center"
+                aria-hidden="true"
+              />
             </button>
-            <button type="button" className="btn btn-sm btn-secondary" title="Align right"
+            <button
+              type="button"
+              className="btn btn-sm btn-secondary"
+              title="Align right"
               onClick={() => actions.changeAnnotationAlign(i, 'r')}
             >
-              <i className="fa fa-align-right" aria-hidden="true"></i>
+              <i
+                className="fa fa-align-right"
+                aria-hidden="true"
+              />
             </button>
           </div>
           <div className="btn-group" role="group" aria-label="Size" >
-            <button type="button" className="btn btn-sm btn-secondary" title="Small font"
+            <button
+              type="button"
+              className="btn btn-sm btn-secondary"
+              title="Small font"
               onClick={() => actions.changeAnnotationFontSize(i, 's')}
             >
-              <i className="fa fa-font" aria-hidden="true"></i>
+              <i className="fa fa-font" aria-hidden="true" />
             </button>
-            <button type="button" className="btn btn-sm btn-secondary" title="Regular font"
+            <button
+              type="button"
+              className="btn btn-sm btn-secondary"
+              title="Regular font"
               onClick={() => actions.changeAnnotationFontSize(i, 'm')}
             >
-              <i className="fa fa-font fa-lg" aria-hidden="true"></i>
+              <i className="fa fa-font fa-lg" aria-hidden="true" />
             </button>
           </div>
           <div className="btn-group" role="group" aria-label="Size">
-            <button type="button" className="btn btn-sm btn-secondary" title="Background"
+            <button
+              type="button"
+              className="btn btn-sm btn-secondary"
+              title="Background"
               onClick={() => actions.changeAnnotationBackground(i)}
             >
               BG
@@ -265,6 +297,10 @@ export default React.createClass({
     return (
       <div>
         <h4>Free Annotations</h4>
+        <small
+          style={{ display: 'block' }}
+        >Add free standing annotations below. Annotations must be created
+        separately for each chart size.</small>
         <button className="btn btn-sm" onClick={this.addAnnotation}>Add +</button>
         <div className="annotations">
           {notes}
@@ -275,7 +311,7 @@ export default React.createClass({
           <h4>
             <a onClick={this.changeTab} href="">
               <b>Next:</b> Publish
-              <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+              <i className="fa fa-arrow-circle-o-right" aria-hidden="true" />
             </a>
           </h4>
         </div>

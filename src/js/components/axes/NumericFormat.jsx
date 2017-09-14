@@ -13,7 +13,6 @@ export default React.createClass({
   getInitialState() {
     return {
       mirrorOpts: true,
-      activeOpts: 'single',
       // We keep custom ticks as text values for the input in state, but parse
       // them as an array of numbers to send to state tree.
       singleCustomValue: null,
@@ -22,58 +21,13 @@ export default React.createClass({
   },
 
   /**
-   * Enable independent double-column options.
-   * @return {void}
-   */
-  enableOpts() {
-    if (this.state.mirrorOpts) {
-      this.setState({ mirrorOpts: false });
-    }
-  },
-
-  /**
-   * Switch between single and double-column opts.
-   * @param  {String} size Ie, 'single' or 'double'
-   * @return {void}
-   */
-  switchOpts(size) {
-    switch (size) {
-      case 'single':
-        this.setState({
-          activeOpts: 'single',
-        });
-        break;
-      case 'double':
-        this.setState({
-          mirrorOpts: false,
-          activeOpts: 'double',
-        });
-        break;
-      default:
-        break;
-    }
-  },
-
-  /**
-   * Determine if opts are disabled, ie, not shown.
+   * Determine if opts are disabled, i.e., not shown.
    * @param  {String} size Ie, 'single' or 'double'
    * @return {String}   Class names
    */
   disabledClass(size) {
-    const active = this.state.activeOpts;
-    const mirror = this.state.mirrorOpts;
-
-    switch (size) {
-      case 'single':
-        return active === 'single' ?
-          'form-group' : 'disabled form-group';
-      case 'double':
-        if (mirror) return 'disabled form-group';
-        if (active === 'double') return 'form-group';
-        return 'disabled form-group';
-      default:
-        return 'disabled form-group';
-    }
+    const active = this.props.werk.ui.size;
+    return size === active ? 'form-group' : 'disabled form-group';
   },
 
   /**
@@ -82,7 +36,7 @@ export default React.createClass({
    * @return {String}   Class names
    */
   activeClass(size) {
-    return size === this.state.activeOpts ? 'active' : null;
+    return size === this.props.werk.ui.size ? 'active' : null;
   },
 
   /**
@@ -368,26 +322,42 @@ export default React.createClass({
   },
 
   render() {
+    const actions = this.props.actions;
     return (
       <div className="inline-exclusive-format clearfix numeric">
         <small>
           Pick how many ticks you would like on the axis. You can also set
           custom ticks by entering them into the text box, separated by commas.
-          Tick options for the single-column chart are used for the
-          double-column chart by default. Click the double-column size button
-          to set ticks independently.
+          Tick options for the single and double-column chart sizes are linked by default.
+          Click a size button to set options independently.
         </small>
         <div className="form-group size-switch">
-          <label>Size</label>
+          <label>
+            Size
+            <i
+              className={this.state.mirrorOpts ? 'fa fa-link' : 'fa fa-chain-broken'}
+              style={{
+                marginLeft: '3px',
+                color: this.state.mirrorOpts ? 'grey' : '#aaa',
+              }}
+              title={this.state.mirrorOpts ? 'Options linked' : 'Options independent'}
+            />
+          </label>
           <img
-            onClick={this.switchOpts.bind(this,'single')} // eslint-disable-line
+            onClick={() => {
+              this.setState({ mirrorOpts: false });
+              actions.changePreview('single');
+            }}
             src={`${window.chartwerkConfig.static_prefix}img/icons/singleColumn.png`}
             title="Single-wide"
             className={this.activeClass('single')}
             alt="Single-wide"
           />
           <img
-            onClick={this.switchOpts.bind(this,'double')} // eslint-disable-line
+            onClick={() => {
+              this.setState({ mirrorOpts: false });
+              actions.changePreview('double');
+            }}
             src={`${window.chartwerkConfig.static_prefix}img/icons/doubleColumn.png`}
             title="Double-wide"
             className={this.activeClass('double')}
