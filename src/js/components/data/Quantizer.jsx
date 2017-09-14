@@ -183,8 +183,7 @@ module.exports = React.createClass({
     return chroma
       .scale(scheme)
       .mode('lab')
-      .classes(groups)
-      .colors();
+      .colors(groups);
   },
 
   /**
