@@ -76,6 +76,22 @@ export default React.createClass({
       return null;
     }
 
+    /**
+     * Provides a useful placeholder for legend color labels.
+     * @param  {string} hexColor The color of the key.
+     * @param  {integer} i        The index of the key.
+     * @return {string}          A placeholder text.
+     */
+    const placeholder = (hexColor, i) => {
+      const colorIndex = color.range.indexOf(hexColor);
+      // Quantized/threshold color scales have one more range value than
+      // domain. We use the min value of the color range for a placeholder.
+      if (color.quantize) {
+        return i === 0 ? 'min label' : color.domain[colorIndex + 1];
+      }
+      return color.domain[colorIndex];
+    };
+
     const keySet = werk.text.legend.keys.map((key, i) =>
       (
         <div className="legend-key" key={i}>
@@ -88,9 +104,7 @@ export default React.createClass({
             type="text"
             maxLength="50"
             value={key.text}
-            placeholder={color.domain[
-              color.range.indexOf(key.color)
-            ]}
+            placeholder={placeholder(key.color, i)}
             onChange={e => actions.changeLegendKey(i, key.color, e.target.value)}
           />
           <div className="key-sort">

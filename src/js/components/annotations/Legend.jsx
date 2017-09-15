@@ -1,9 +1,9 @@
 import React from 'react';
+import _ from 'lodash';
 import { renderToStaticMarkup as staticRender } from 'react-dom/server';
 import Keys from './LegendKeys';
 import marked from './../../misc/utils';
 import LegendDisplay from './LegendDisplay';
-import _ from 'lodash';
 
 
 export default React.createClass({
@@ -57,7 +57,7 @@ export default React.createClass({
           <div
             className="key-color"
             style={{ backgroundColor: key.color }}
-          ></div>
+          />
           <div className="key-label">{marked.inlineLexer(key.text, [])}</div>
         </div>
 
@@ -96,7 +96,7 @@ export default React.createClass({
           {marked.inlineLexer(werk.text.legend.title, [])}
         </div>
         {keys}
-        <div className="handle"></div>
+        <div className="handle" />
       </div>
     );
 
@@ -190,7 +190,7 @@ export default React.createClass({
       const sX = e.pageX;
       const sY = e.pageY;
 
-      $(document).on('mousemove.drag', dragEvent => {
+      $(document).on('mousemove.drag', (dragEvent) => {
         dragEvent.stopPropagation();
         x = Math.max(Math.min(oX + (dragEvent.pageX - sX), chartWidth - width), 0);
         y = Math.max(Math.min(oY + (dragEvent.pageY - sY), chartHeight - height), 0);
@@ -226,8 +226,8 @@ export default React.createClass({
                 this.props.actions.setLegendActive();
               }}
             />
-            <i className="fa fa-square-o"></i>
-            <i className="fa fa-check-square-o"></i>
+            <i className="fa fa-square-o" />
+            <i className="fa fa-check-square-o" />
           </label>
         </div>
         <Keys {...this.props} />
