@@ -87,7 +87,7 @@ export default React.createClass({
       // Quantized/threshold color scales have one more range value than
       // domain. We use the min value of the color range for a placeholder.
       if (color.quantize) {
-        return i === 0 ? 'min label' : color.domain[colorIndex + 1];
+        return i === 0 ? 'min label' : color.domain[colorIndex - 1];
       }
       return color.domain[colorIndex];
     };
