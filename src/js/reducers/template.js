@@ -1,6 +1,6 @@
-import * as types from '../constants/actions';
 import assign from 'object-assign';
 import _ from 'lodash';
+import * as types from '../constants/actions';
 
 /**
  * data reducer
@@ -13,6 +13,7 @@ import _ from 'lodash';
 export default (template, action) => {
   const initialState = {
     title: null,
+    id: window.chartwerkConfig.template_id,
     description: null,
     icon: null,
     tags: [],

@@ -1,8 +1,8 @@
-import reducers from '../reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
-import actions from '../actions';
 import thunk from 'redux-thunk';
 import assign from 'object-assign';
+import actions from '../actions';
+import reducers from '../reducers';
 
 import * as api from '../misc/api';
 

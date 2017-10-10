@@ -1,6 +1,6 @@
-import * as types from '../constants/actions';
 import assign from 'object-assign';
 import _ from 'lodash';
+import * as types from '../constants/actions';
 
 /**
  * axis reducer

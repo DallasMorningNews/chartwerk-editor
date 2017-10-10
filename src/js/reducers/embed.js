@@ -1,5 +1,5 @@
-import * as types from '../constants/actions';
 import _ from 'lodash';
+import * as types from '../constants/actions';
 
 /**
  * data reducer

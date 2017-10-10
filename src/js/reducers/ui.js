@@ -1,7 +1,7 @@
-import * as types from '../constants/actions';
-import defaultDatamap from '../constants/datamap';
 import assign from 'object-assign';
 import _ from 'lodash';
+import * as types from '../constants/actions';
+import defaultDatamap from '../constants/datamap';
 
 
 /**
@@ -48,9 +48,8 @@ export default (ui, action) => {
   const syncClasses = (classes) => {
     const defaultClasses = defaultDatamap.map(d => d.class);
     const retainClasses = _.filter(nextState.datamap,
-      d => defaultClasses.indexOf(d.class) > -1
-    );
-    const newClasses = classes.slice().map(d => {
+      d => defaultClasses.indexOf(d.class) > -1);
+    const newClasses = classes.slice().map((d) => {
       const fullObject = {
         class: d.class,
         alias: d.alias,
