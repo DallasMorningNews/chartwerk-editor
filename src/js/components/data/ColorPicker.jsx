@@ -33,8 +33,7 @@ export default React.createClass({
     if (this.props.column) {
       this.props.actions.setColor(
         this.props.column,
-        this.state.selectedColor
-      );
+        this.state.selectedColor);
     }
   },
 
@@ -58,18 +57,20 @@ export default React.createClass({
       return (
         <div
           className="color-square"
+          role="button"
+          tabIndex={0}
           color={color}
           style={divStyle}
           onClick={this.selectColor}
           key={i}
-        ></div>
+        />
       );
     });
 
     const picker = this.state.pickerVisible ?
-      <div className="colorpicker-panel clearfix">
-          {choices}
-      </div> : '';
+      (<div className="colorpicker-panel clearfix">
+        {choices}
+      </div>) : '';
 
     const divStyle = {
       backgroundColor: this.state.selectedColor,
@@ -77,7 +78,13 @@ export default React.createClass({
 
     return (
       <div className="colorpicker">
-        <div className="color-square" style={divStyle} onClick={this.showPicker}></div>
+        <div
+          className="color-square"
+          role="button"
+          tabIndex={0}
+          style={divStyle}
+          onClick={this.showPicker}
+        />
         {picker}
       </div>
     );

@@ -288,7 +288,9 @@ export default React.createClass({
     const column = werk.datamap.scale && !werk.axes.color.quantize ?
       werk.datamap.scale : werk.datamap.facet;
     // Ternary prevents ColorPicker being initialized on an array with undefined members.
-    const groups = column ? _.uniq(werk.data.map(datum => datum[column])) : [];
+    const groups = column ? _.filter( // Filter out any empty values
+      _.uniq(werk.data.map(datum => datum[column])), // Take unique values from column
+      d => d.trim() !== '') : [];
     groups.sort();
 
     if (groups.length > 8) {

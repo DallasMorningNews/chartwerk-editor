@@ -3,9 +3,10 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import _ from 'lodash';
 import d3 from 'd3';
 import chroma from 'chroma-js';
-import colors from '../../constants/colors';
 import geostats from 'geostats';
+import colors from '../../constants/colors';
 import QuantizerViz from './QuantizerViz';
+
 
 module.exports = React.createClass({
 
@@ -48,8 +49,7 @@ module.exports = React.createClass({
     if (this.state.scheme !== nextProps.werk.axes.color.scheme) {
       this.setState({ scheme: nextProps.werk.axes.color.scheme });
       this.props.actions.setQuantizeRange(
-        this.equidistantColors(nextProps.werk.axes.color.quantizeProps.groups)
-      );
+        this.equidistantColors(nextProps.werk.axes.color.quantizeProps.groups));
     }
   },
 
@@ -103,11 +103,10 @@ module.exports = React.createClass({
         .range(data.extent)
         .domain(data.extent);
 
-    return _.map(this.equalGroups(groups), (d) =>
+    return _.map(this.equalGroups(groups), d =>
       (
         parseFloat(logScale(d).toPrecision(4))
-      )
-    );
+      ));
   },
 
   /**
@@ -122,11 +121,10 @@ module.exports = React.createClass({
         .range(data.extent)
         .domain(data.extent);
 
-    return _.map(this.equalGroups(groups), (d) =>
+    return _.map(this.equalGroups(groups), d =>
       (
         parseFloat(sqrScale(d).toPrecision(4))
-      )
-    );
+      ));
   },
 
   /**
@@ -141,11 +139,10 @@ module.exports = React.createClass({
         .range(data.extent)
         .domain(data.extent);
 
-    return _.map(this.equalGroups(groups), (d) =>
+    return _.map(this.equalGroups(groups), d =>
       (
         parseFloat(sqtScale(d).toPrecision(4))
-      )
-    );
+      ));
   },
 
   /**
@@ -332,8 +329,7 @@ module.exports = React.createClass({
     const quantizeProps = this.props.werk.axes.color.quantizeProps;
 
     actions.setQuantizeRange(
-      this.equidistantColors(quantizeProps.groups)
-    );
+      this.equidistantColors(quantizeProps.groups));
   },
 
 
@@ -397,8 +393,7 @@ module.exports = React.createClass({
     const quantizeProps = werk.axes.color.quantizeProps;
 
     const groupInputs = _.map(thresholds, (n, i) =>
-      (
-      <div key={i}>
+      (<div key={i}>
         <input
           type="number"
           className="form-control"
@@ -407,9 +402,7 @@ module.exports = React.createClass({
           max={this.inputMax(n)}
           onChange={this.changeThreshold.bind(this, i)}
         />
-      </div>
-      )
-    );
+      </div>));
 
     return (
       <div className="quantize-select">
@@ -445,10 +438,10 @@ module.exports = React.createClass({
                 <div className="quantize-group-buttons clearfix">
                   <h5>Groups</h5>
                   <div onClick={this.addGroup} className={this.activeButton('max')}>
-                    <i className="fa fa-plus" aria-hidden="true"></i>
+                    <i className="fa fa-plus" aria-hidden="true" />
                   </div>
                   <div onClick={this.removeGroup} className={this.activeButton('min')}>
-                    <i className="fa fa-minus" aria-hidden="true"></i>
+                    <i className="fa fa-minus" aria-hidden="true" />
                   </div>
                   <div onClick={this.reverseColor}>Reverse</div>
                 </div>

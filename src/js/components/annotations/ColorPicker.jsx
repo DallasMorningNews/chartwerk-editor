@@ -1,6 +1,7 @@
 import React from 'react';
-import colors, { black, white } from '../../constants/colors';
 import _ from 'lodash';
+import colors, { black, white } from '../../constants/colors';
+
 
 export default React.createClass({
 
@@ -68,9 +69,9 @@ export default React.createClass({
     choices.push(defaultWhite);
 
     const picker = this.state.pickerVisible ?
-      <div className="colorpicker-panel clearfix">
-          {choices}
-      </div> : '';
+      (<div className="colorpicker-panel clearfix">
+        {choices}
+      </div>) : '';
 
 
     const buttonStyle = {
@@ -79,10 +80,13 @@ export default React.createClass({
 
     return (
       <div className="btn-group" role="group" aria-label="Color">
-        <button type="button" className="btn btn-sm btn-secondary" title="Color"
+        <button
+          type="button"
+          className="btn btn-sm btn-secondary"
+          title="Color"
           onClick={this.showPicker}
         >
-          <i className="fa fa-square" style={buttonStyle}></i>
+          <i className="fa fa-square" style={buttonStyle} />
         </button>
         {picker}
       </div>
