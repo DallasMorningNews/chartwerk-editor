@@ -9,6 +9,7 @@
 
 // Page Components
 @import 'header';
+@import 'toggle';
 @import 'modals/loading';
 @import 'modals/data-preview';
 @import 'modals/data-help';
@@ -32,3 +33,5 @@
 @import 'chartwerkReset';
 @import 'annotations';
 @import 'legend';
+
+body{margin: 0;}

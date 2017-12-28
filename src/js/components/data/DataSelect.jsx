@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 import _ from 'lodash';
 import ellipsize from 'ellipsize';
 import ColorPicker from './ColorPicker';

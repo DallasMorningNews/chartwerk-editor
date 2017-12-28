@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import viz from './MarginViz-d3';
 import _ from 'lodash';
+import viz from './MarginViz-d3';
 
 
 export default React.createClass({
@@ -20,23 +19,21 @@ export default React.createClass({
    */
   getChartState() {
     const werk = this.props.werk;
-    return this.props.size === 'single' ?
-      {
-        top: werk.margins.single.top,
-        right: werk.margins.single.right,
-        bottom: werk.margins.single.bottom,
-        left: werk.margins.single.left,
-        width: 200,
-        height: 120,
-      } :
-      {
-        top: werk.margins.double.top,
-        right: werk.margins.double.right,
-        bottom: werk.margins.double.bottom,
-        left: werk.margins.double.left,
-        width: 200,
-        height: 120,
-      };
+    return this.props.size === 'single' ? {
+      top: werk.margins.single.top,
+      right: werk.margins.single.right,
+      bottom: werk.margins.single.bottom,
+      left: werk.margins.single.left,
+      width: 200,
+      height: 120,
+    } : {
+      top: werk.margins.double.top,
+      right: werk.margins.double.right,
+      bottom: werk.margins.double.bottom,
+      left: werk.margins.double.left,
+      width: 200,
+      height: 120,
+    };
   },
 
   /**
@@ -44,11 +41,10 @@ export default React.createClass({
    * @return {void}
    */
   componentDidMount() {
-    const el = ReactDOM.findDOMNode(this);
     viz.create(
-      el,
+      this.node,
       this.getChartState(),
-      this
+      this,
     );
   },
 
@@ -57,11 +53,10 @@ export default React.createClass({
    * @return {void}
    */
   componentDidUpdate() {
-    const el = ReactDOM.findDOMNode(this);
     viz.update(
-      el,
+      this.node,
       this.getChartState(),
-      this
+      this,
     );
   },
 
@@ -72,7 +67,7 @@ export default React.createClass({
 
   render() {
     return (
-      <div id="margin-viz"></div>
+      <div id="margin-viz" ref={(node) => { this.node = node; }} />
     );
   },
 });

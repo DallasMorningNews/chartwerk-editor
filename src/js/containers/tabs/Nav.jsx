@@ -2,9 +2,9 @@ import React from 'react';
 
 export default () => (
   <ul className="nav nav-tabs" role="tablist">
-    <li role="presentation" className="active">
+    <li role="presentation">
       <a href="#data" data-target="#data" aria-controls="data"
-        role="tab" data-toggle="tab"
+        role="tab" data-toggle="tab" className="active"
       >Data</a>
     </li>
     <li role="presentation">

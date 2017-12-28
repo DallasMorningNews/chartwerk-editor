@@ -1,6 +1,7 @@
 // Adapted from https://github.com/benrlodge/react-simplemde-editor
 import React from 'react';
 import SimpleMDE from 'simplemde';
+import 'simplemde/dist/simplemde.min.css';
 
 let genID = 0;
 

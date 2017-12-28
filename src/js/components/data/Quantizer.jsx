@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import _ from 'lodash';
-import d3 from 'd3';
+import * as d3 from 'd3';
 import chroma from 'chroma-js';
 import geostats from 'geostats';
 import colors from '../../constants/colors';
@@ -87,8 +87,7 @@ module.exports = React.createClass({
     return _.map(new Array(groups - 1), (k, i) =>
       (
         parseFloat((data.extent[0] + (band * (i + 1))).toPrecision(4))
-      )
-    );
+      ));
   },
 
   /**
@@ -99,7 +98,7 @@ module.exports = React.createClass({
   logGroups(groups) {
     const data = this.props.data;
 
-    const logScale = d3.scale.log()
+    const logScale = d3.scaleLog()
         .range(data.extent)
         .domain(data.extent);
 
@@ -117,7 +116,7 @@ module.exports = React.createClass({
   sqrGroups(groups) {
     const data = this.props.data;
 
-    const sqrScale = d3.scale.pow().exponent(2)
+    const sqrScale = d3.scalePow().exponent(2)
         .range(data.extent)
         .domain(data.extent);
 
@@ -135,7 +134,7 @@ module.exports = React.createClass({
   sqtGroups(groups) {
     const data = this.props.data;
 
-    const sqtScale = d3.scale.pow().exponent(0.5)
+    const sqtScale = d3.scalePow().exponent(0.5)
         .range(data.extent)
         .domain(data.extent);
 
@@ -314,7 +313,6 @@ module.exports = React.createClass({
       default:
         this.setQuantizeDomain(this.equalGroups(quantizeProps.groups));
     }
-    return;
   },
 
   /**
