@@ -1,4 +1,4 @@
-import * as types from '../constants/actions.js';
+import * as types from '../constants/actions';
 
 export const apiText = texts => ({
   type: types.API_TEXT,
@@ -102,7 +102,7 @@ export const unsetLegend = () => ({
   type: types.UNSET_LEGEND,
 });
 
-export const setLegendKeys = (keys) => ({
+export const setLegendKeys = keys => ({
   type: types.SET_LEGEND_KEYS,
   keys,
 });
@@ -114,17 +114,17 @@ export const changeLegendKey = (index, color, text) => ({
   text,
 });
 
-export const changeLegendKeyOrderUp = (index) => ({
+export const changeLegendKeyOrderUp = index => ({
   type: types.CHANGE_LEGEND_KEY_ORDER_UP,
   index,
 });
 
-export const changeLegendKeyOrderDown = (index) => ({
+export const changeLegendKeyOrderDown = index => ({
   type: types.CHANGE_LEGEND_KEY_ORDER_DOWN,
   index,
 });
 
-export const changeLegendTitle = (text) => ({
+export const changeLegendTitle = text => ({
   type: types.CHANGE_LEGEND_TITLE,
   text,
 });
@@ -135,12 +135,12 @@ export const changeLegendAlign = (size, align) => ({
   align,
 });
 
-export const changeLegendBackground = (size) => ({
+export const changeLegendBackground = size => ({
   type: types.CHANGE_LEGEND_BACKGROUND,
   size,
 });
 
-export const changeLegendInside = (size) => ({
+export const changeLegendInside = size => ({
   type: types.CHANGE_LEGEND_INSIDE,
   size,
 });
@@ -158,7 +158,7 @@ export const changeLegendWidth = (size, width) => ({
   width,
 });
 
-export const setChartTitle = (title) => ({
+export const setChartTitle = title => ({
   type: types.SET_CHART_TITLE,
   title,
 });

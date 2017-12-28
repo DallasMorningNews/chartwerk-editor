@@ -1,8 +1,9 @@
 import React from 'react';
 import { Converter } from 'csvtojson';
-import tableify from 'tableify';
-
+import Modal from 'react-modal';
+import JsonTable from 'react-json-table';
 import DataSelect from './DataSelect';
+
 
 export default React.createClass({
 
@@ -14,9 +15,10 @@ export default React.createClass({
   getInitialState() {
     return {
       format: null,
+      preview: false,
+      sortedHeader: [],
     };
   },
-
 
   handleDataChange(e) {
     const data = e.target.value;
@@ -27,10 +29,12 @@ export default React.createClass({
     const tsvConverter = new Converter({
       delimiter: '	', // eslint-disable-line no-tabs
       flatKeys: true,
+      checkType: false,
     });
     const csvConverter = new Converter({
       delimiter: ',', // comma-delimited
       flatKeys: true,
+      checkType: false,
     });
 
     /**
@@ -41,6 +45,7 @@ export default React.createClass({
      * @return {void}
      */
     function typeCheck(localData) {
+      const header = localData.split('\n')[0];
       if (localData === '') {
         this.setState(this.getInitialState());
         return;
@@ -49,13 +54,19 @@ export default React.createClass({
       try {
         const jsonObj = JSON.parse(localData);
         actions.attachData(jsonObj);
-        this.setState({ format: 'JSON' });
+        this.setState({
+          format: 'JSON',
+          sortedHeader: Object.keys(jsonObj[0]),
+        });
+        actions.setHeaderSort(this.state.sortedHeader);
       } catch (error) {
         // Try TSV
         if (localData.indexOf('	') > -1) { // eslint-disable-line no-tabs
+          this.setState({ sortedHeader: header.split('	') }); // eslint-disable-line no-tabs
           tsvConverter.fromString(localData);
         // CSV
         } else {
+          this.setState({ sortedHeader: header.split(',') });
           csvConverter.fromString(localData);
         }
       }
@@ -71,7 +82,7 @@ export default React.createClass({
      */
     function parse(format, jsonObj) {
       actions.attachData(jsonObj);
-      actions.setHeaderSort(Object.keys(jsonObj[0]));
+      actions.setHeaderSort(this.state.sortedHeader);
       this.setState({ format });
     }
 
@@ -87,17 +98,13 @@ export default React.createClass({
           <p className="parse-success">
             Successfully parsed {this.state.format} data
             <button className="btn btn-sm"
-              data-toggle="modal"
-              data-target="#data-preview-modal"
+              onClick={() => this.setState({ preview: true })}
             >
                 Preview
             </button>
           </p>
           <DataSelect werk={this.props.werk} actions={this.props.actions} />
         </div>);
-
-      // Can probably do this a more declarative way...
-    $('#data-preview-modal .modal-body').html(tableify(this.props.werk.data));
 
     return (
       <div>
@@ -109,6 +116,21 @@ export default React.createClass({
           onChange={this.handleDataChange}
         />
         {success}
+        <Modal
+          isOpen={this.state.preview}
+          onRequestClose={() => this.setState({ preview: false })}
+        >
+          <i
+            className="fa fa-times"
+            role="button"
+            tabIndex={0}
+            onClick={() => this.setState({ preview: false })}
+          />
+          <JsonTable
+            rows={this.props.werk.data}
+            columns={this.props.werk.datamap.sort}
+          />
+        </Modal>
       </div>
     );
   },

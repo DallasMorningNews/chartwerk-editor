@@ -1,4 +1,4 @@
-import * as types from '../constants/actions.js';
+import * as types from '../constants/actions';
 
 export const apiUI = ui => ({
   type: types.API_UI,
@@ -26,7 +26,7 @@ export const setDataClassAlias = (dataClass, alias) => ({
   alias,
 });
 
-export const syncCustomClasses = (classes) => ({
+export const syncCustomClasses = classes => ({
   type: types.SYNC_CUSTOM_CLASSES,
   classes,
 });

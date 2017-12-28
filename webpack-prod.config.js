@@ -12,8 +12,8 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.json'],
   },
   entry: _.zipObject(
-    glob.sync('./src/js/*.js').map(f => path.basename(f, path.extname(f))),
-    glob.sync('./src/js/*.js'),
+    glob.sync('./src/js/*.js*').map(f => path.basename(f, path.extname(f))),
+    glob.sync('./src/js/*.js*'),
   ),
   output: {
     path: path.resolve(__dirname, '/dist/js'),
@@ -71,7 +71,7 @@ module.exports = {
     }),
     new OptimizeCssAssetsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new UglifyJSPlugin(),
+    new UglifyJSPlugin({ sourceMap: true }),
     new webpack.ProvidePlugin({
       fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
     }),
@@ -83,4 +83,5 @@ module.exports = {
       Tab: 'exports-loader?Tab!bootstrap/js/dist/tab',
     }),
   ],
+  devtool: 'source-map',
 };

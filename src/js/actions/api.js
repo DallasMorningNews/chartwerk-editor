@@ -1,6 +1,3 @@
-require('es6-promise').polyfill();
-
-import fetch from 'isomorphic-fetch';
 import { locations } from './../misc/config';
 
 import * as uiActions from './ui';
@@ -13,15 +10,14 @@ import * as templateActions from './template';
 import * as embedActions from './embed';
 
 
-export function fetchWerk() {
+export default function fetchWerk() {
   const endpoint = window.chartwerkConfig.chart_id !== '' ?
     locations.chart : locations.template;
   return dispatch => fetch(endpoint)
     .then(
-      response => response.json()
-    )
+      response => response.json())
     .then(
-      response => {
+      (response) => {
         const data = response.data;
         // Dispatch API actions for data props
         if (data.data) {
@@ -51,9 +47,8 @@ export function fetchWerk() {
         if (data.embed) {
           dispatch(embedActions.apiEmbed(data.embed));
         }
-      }
-    )
-    .catch(error => {
+      })
+    .catch((error) => {
       console.log('API ERROR', error);
       console.log('ERROR STACK', error.stack);
     });

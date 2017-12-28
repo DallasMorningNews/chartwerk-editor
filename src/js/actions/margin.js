@@ -1,4 +1,4 @@
-import * as types from '../constants/actions.js';
+import * as types from '../constants/actions';
 
 export const apiMargins = margins => ({
   type: types.API_MARGINS,

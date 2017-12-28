@@ -18,8 +18,7 @@ app.set('view engine', 'html');
 app.use(express.static('src'));
 app.use('/img', express.static('dist/img'));
 app.use('/fonts', express.static('dist/fonts'));
-app.use('/css', express.static('dist/css'));
-// app.use('/js', express.static('dist/js'));
+
 
 module.exports = (port) => {
   const webpackConfig = webpackConfigBuilder(port);
