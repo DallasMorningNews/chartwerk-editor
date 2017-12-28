@@ -8,7 +8,7 @@ import AnnotationsTab from './Annotations';
 import CodeTab from './Code';
 import PublishTab from './Publish';
 
-const Tabs = (props) => (
+const Tabs = props => (
   <div className="tab-content">
     <DataTab {...props} />
     <AxesTab {...props} />

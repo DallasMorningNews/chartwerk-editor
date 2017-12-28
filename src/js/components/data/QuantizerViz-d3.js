@@ -1,4 +1,4 @@
-import d3 from 'd3';
+import * as d3 from 'd3';
 import _ from 'lodash';
 
 module.exports = {
@@ -36,18 +36,15 @@ module.exports = {
   scales(el, props, data, thresholds, colorRange) {
     const width = props.width - props.margin.right - props.margin.left;
 
-    const x = d3.scale.linear()
+    const x = d3.scaleLinear()
       .domain(d3.extent(data))
       .range([0, width]);
 
-    const color = d3.scale.threshold()
+    const color = d3.scaleThreshold()
         .domain(_.slice(thresholds, 1)) // Without min point
         .range(colorRange);
 
-    return {
-      x,
-      color,
-    };
+    return { x, color };
   },
 
   draw(el, props, scales, data, thresholds, that) {
@@ -62,8 +59,8 @@ module.exports = {
 
     const chartThresholds = _.slice(thresholds, 1);
 
-    const drag = d3.behavior.drag()
-              .on('drag', function(d,i) { // eslint-disable-line
+    const drag = d3.drag()
+              .on('drag', function(d, i) { // eslint-disable-line
 
                 const I = thresholds.indexOf(d);
                 const next = I < thresholds.length - 1 ?
@@ -109,11 +106,10 @@ module.exports = {
 
     const svg = d3.select(el).select('.quant-chart');
 
-    const xAxis = d3.svg.axis()
+    const xAxis = d3.axisTop()
       .scale(scales.x)
       .ticks(5)
-      .tickPadding(10)
-      .orient('top');
+      .tickPadding(10);
 
     const bars = svg.selectAll('.quant-bars')
       .data(thresholds);
@@ -122,20 +118,14 @@ module.exports = {
       .attr('class', 'quant-bars');
 
     bars
-      .attr({
-        x(d) {
-          return scales.x(d);
-        },
-        height,
-        width(d, i) {
-          const max = i + 1 < thresholds.length ?
-                    scales.x(thresholds[i + 1]) : scales.x.range()[1];
-          return max - scales.x(d);
-        },
-        fill(d) {
-          return scales.color(d);
-        },
-      });
+      .attr('x', d => scales.x(d))
+      .attr('height', height)
+      .attr('width', (d, i) => {
+        const max = i + 1 < thresholds.length ?
+                  scales.x(thresholds[i + 1]) : scales.x.range()[1];
+        return max - scales.x(d);
+      })
+      .attr('fill', d => scales.color(d));
 
     bars.exit().remove();
 
@@ -146,17 +136,11 @@ module.exports = {
       .attr('class', 'quant-lines');
 
     delimiters
-      .attr({
-        class: 'quant-lines',
-        y1: 0,
-        y2: height,
-        x1(d) {
-          return scales.x(d);
-        },
-        x2(d) {
-          return scales.x(d);
-        },
-      })
+      .attr('class', 'quant-lines')
+      .attr('y1', 0)
+      .attr('y2', height)
+      .attr('x1', d => scales.x(d))
+      .attr('x2', d => scales.x(d))
       .call(drag);
 
     delimiters.exit().remove();
@@ -168,16 +152,10 @@ module.exports = {
       .attr('class', 'quant-distribs');
 
     distribs
-      .attr({
-        y1: -2,
-        y2: -12,
-        x1(d) {
-          return scales.x(d);
-        },
-        x2(d) {
-          return scales.x(d);
-        },
-      });
+      .attr('y1', -2)
+      .attr('y2', -12)
+      .attr('x1', d => scales.x(d))
+      .attr('x2', d => scales.x(d));
 
     distribs.exit().remove();
 

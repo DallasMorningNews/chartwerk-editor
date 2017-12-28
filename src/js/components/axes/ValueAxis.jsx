@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NumericFormat from './NumericFormat.jsx';
+import NumericFormat from './NumericFormat';
 import ShadedRegions from './ShadedRegions';
 
 const ValueAxis = (props) => {

@@ -1,16 +1,13 @@
-const util = require('gulp-util');
-
-process.env.NODE_ENV = !!util.env.production ? 'production' : 'development';
-
 const gulp = require('./gulp')([
-  'nunjucks',
-  'sass',
-  'browserify',
-  'server',
-  'vendor',
-  'docs',
   'api',
+  'production',
+  'dev',
+  'nunjucks',
 ]);
 
-gulp.task('build', ['nunjucks', 'sass', 'browserify', 'server', 'api']);
-gulp.task('default', ['build']);
+gulp.task('watch', () => {
+  gulp.watch('src/templates/**/*.html', ['nunjucks']);
+});
+
+gulp.task('build', ['nunjucks', 'production']);
+gulp.task('default', ['nunjucks', 'watch', 'dev', 'api']);

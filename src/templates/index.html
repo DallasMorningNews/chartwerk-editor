@@ -3,8 +3,8 @@
 {%block custom_head%}
 <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="css/vendor.css" media="screen" title="no title" charset="utf-8">
-<link rel="stylesheet" href="css/app.css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/editor.css" media="screen" title="no title" charset="utf-8">
 {%endblock%}
 
 {%block custom_js%}
@@ -21,8 +21,7 @@
     oembed: false,
   };
 </script>
-<script type="text/javascript" src="js/vendor.js"></script>
-<script type="text/javascript" src="js/app.bundle.js"></script>
+<script type="text/javascript" src="js/editor.js"></script>
 {%endblock%}
 
 {%block content%}
@@ -49,5 +48,4 @@
     <div class="loading-text"><span>Loading</span><img src="img/loader.gif"></div>
 </div>
 
-{% include "partials/modals/data-preview.html" %}
 {%endblock%}

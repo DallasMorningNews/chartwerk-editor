@@ -1,4 +1,4 @@
-import * as types from '../constants/actions.js';
+import * as types from '../constants/actions';
 
 export const apiData = data => ({
   type: types.API_DATA,
@@ -80,7 +80,7 @@ export const setHeaderSort = data => ({
   data,
 });
 
-export const setCustomKeys = (keys) => ({
+export const setCustomKeys = keys => ({
   type: types.SET_CUSTOM_KEYS,
   keys,
 });

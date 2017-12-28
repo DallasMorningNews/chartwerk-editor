@@ -3,9 +3,9 @@ import AceEditor from 'react-ace';
 import Modal from 'react-modal';
 import Toggle from 'react-toggle';
 import _ from 'lodash';
+import JSONTree from 'react-json-tree';
 import Dependencies from './Dependencies';
 import ApiExplorer from './ApiExplorer';
-import JSONTree from 'react-json-tree';
 
 require('brace/mode/javascript');
 require('brace/mode/scss');

@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 import _ from 'lodash';
 import ellipsize from 'ellipsize';
 import ColorPicker from './ColorPicker';
@@ -337,7 +338,7 @@ export default React.createClass({
     const werk = this.props.werk;
     const actions = this.props.actions;
 
-    const classifySelects = _.keys(werk.data[0]).map((column, i) => {
+    const classifySelects = werk.datamap.sort.map((column, i) => {
       let addOption;
       let article = 'a';
 

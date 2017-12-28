@@ -5,8 +5,8 @@
 {%block custom_head%}
 <link rel="icon" href="{% static 'chartwerk/img/favicon.ico'%}" type="image/x-icon">
 <link rel="shortcut icon" href="{% static 'chartwerk/img/favicon.ico'%}" type="image/x-icon">
-<link rel="stylesheet" href="{% static 'chartwerk/css/vendor.css' %}" media="screen" title="no title" charset="utf-8">
-<link rel="stylesheet" href="{% static 'chartwerk/css/app.css' %}" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="{% static 'chartwerk/css/editor.css' %}" media="screen" title="no title" charset="utf-8">
 {%endblock%}
 
 {%block custom_js%}
@@ -24,8 +24,7 @@
     color_schemes: '{{color_schemes|escapejs}}',
   };
 </script>
-<script type="text/javascript" src="{% static 'chartwerk/js/vendor.js' %}"></script>
-<script type="text/javascript" src="{% static 'chartwerk/js/app.bundle.js' %}"></script>
+<script type="text/javascript" src="{% static 'chartwerk/js/editor.js' %}"></script>
 {%endblock%}
 
 {%block content%}
@@ -52,5 +51,4 @@
     <div class="loading-text"><span>Loading</span><img src="{% static 'chartwerk/img/loader.gif' %}"></div>
 </div>
 
-{% include "chartwerk/partials/modals/data-preview.html" %}
 {%endblock%}

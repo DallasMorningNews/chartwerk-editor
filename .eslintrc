@@ -11,12 +11,12 @@
     "react/prefer-es6-class": 0,
     "no-eval": 0,
     "react/jsx-no-bind": 0,
-    "react/sort-comp": 0,
+    "react/sort-comp": 0
   },
   "env": {
     "browser": true
   },
   "globals": {
-    "$": false,
+    "$": false
   },
 }

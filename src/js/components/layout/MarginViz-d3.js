@@ -1,4 +1,4 @@
-import d3 from 'd3';
+import * as d3 from 'd3';
 
 export default {
 
@@ -7,68 +7,61 @@ export default {
       .append('svg')
       .attr('width', props.width + 40 + 40)
       .attr('height', props.height + 20 + 20)
-      .append('g')
+    .append('g')
       .attr('class', 'margin-chart')
       .attr('transform', 'translate(40, 20)');
 
     svg
       .append('rect')
-        .attr({
-          width: props.width,
-          height: props.height,
-          x: 0,
-          y: 0,
-          class: 'margin-background',
-        });
+        .attr('class', 'margin-background')
+        .attr('width', props.width)
+        .attr('height', props.height)
+        .attr('x', 0)
+        .attr('y', 0);
 
     svg
       .append('text')
-      .attr({
-        class: 'margin-label top',
-        'text-anchor': 'middle',
-        x: props.width / 2,
-        y: -6,
-      });
+      .attr('class', 'margin-label top')
+      .attr('text-anchor', 'middle')
+      .attr('x', props.width / 2)
+      .attr('y', -6);
+
     svg
       .append('text')
-      .attr({
-        class: 'margin-label bottom',
-        'text-anchor': 'middle',
-        x: props.width / 2,
-        y: props.height + 20,
-      });
+      .attr('class', 'margin-label bottom')
+      .attr('text-anchor', 'middle')
+      .attr('x', props.width / 2)
+      .attr('y', props.height + 20);
+
     svg
       .append('text')
-      .attr({
-        class: 'margin-label left',
-        'text-anchor': 'end',
-        x: -6,
-        y: props.height / 2 + 6,
-      });
+      .attr('class', 'margin-label left')
+      .attr('text-anchor', 'end')
+      .attr('x', -6)
+      .attr('y', (props.height / 2) + 6);
+
     svg
       .append('text')
-      .attr({
-        class: 'margin-label right',
-        'text-anchor': 'start',
-        x: props.width + 6,
-        y: props.height / 2 + 6,
-      });
+      .attr('class', 'margin-label right')
+      .attr('text-anchor', 'start')
+      .attr('x', props.width + 6)
+      .attr('y', (props.height / 2) + 6);
 
     svg
       .append('rect')
-        .attr({ class: 'margin-foreground' });
+        .attr('class', 'margin-foreground');
     svg
       .append('rect')
-      .attr({ class: 'margin-handle top' });
+      .attr('class', 'margin-handle top');
     svg
       .append('rect')
-      .attr({ class: 'margin-handle bottom' });
+      .attr('class', 'margin-handle bottom');
     svg
       .append('rect')
-      .attr({ class: 'margin-handle right' });
+      .attr('class', 'margin-handle right');
     svg
       .append('rect')
-      .attr({ class: 'margin-handle left' });
+      .attr('class', 'margin-handle left');
 
 
     this.update(el, props, that);
@@ -90,18 +83,14 @@ export default {
   },
 
   scales(props) {
-    const x = d3.scale.linear()
+    const x = d3.scaleLinear()
       .domain([0, 1])
       .range([0, props.width]);
-    const y = d3.scale.linear()
+    const y = d3.scaleLinear()
       .domain([0, 1])
       .range([0, props.height]);
 
-
-    return {
-      x,
-      y,
-    };
+    return { x, y };
   },
 
   draw(el, props, scales, that) {
@@ -119,37 +108,37 @@ export default {
     const innerHeight = props.height - margin.top - margin.bottom;
 
 
-    const ldrag = () => {
+    function ldrag() {
       const x = scales.x.invert(d3.event.x);
       const newX = d3.max([0, d3.min([x, 0.25])]).toFixed(2);
       that.dragMargin(newX, 'left');
-    };
+    }
 
-    const rdrag = () => {
+    function rdrag() {
       const x = scales.x.invert(d3.event.x);
       const newX = d3.max([0.75, d3.min([x, 1])]).toFixed(2);
       that.dragMargin(1 - newX, 'right');
-    };
+    }
 
-    const tdrag = () => {
+    function tdrag() {
       const y = scales.y.invert(d3.event.y);
       const newY = d3.max([0, d3.min([y, 0.25])]).toFixed(2);
       that.dragMargin(newY, 'top');
-    };
+    }
 
-    const bdrag = () => {
+    function bdrag() {
       const y = scales.y.invert(d3.event.y);
       const newY = d3.max([0.75, d3.min([y, 1])]).toFixed(2);
       that.dragMargin(1 - newY, 'bottom');
-    };
+    }
 
-    const dragLeft = d3.behavior.drag()
+    const dragLeft = d3.drag()
         .on('drag', ldrag);
-    const dragRight = d3.behavior.drag()
+    const dragRight = d3.drag()
         .on('drag', rdrag);
-    const dragTop = d3.behavior.drag()
+    const dragTop = d3.drag()
         .on('drag', tdrag);
-    const dragBottom = d3.behavior.drag()
+    const dragBottom = d3.drag()
         .on('drag', bdrag);
 
     labelTop
@@ -162,49 +151,39 @@ export default {
       .text(`${Math.round(props.right * 100).toString()}%`);
 
     rect
-      .attr({
-        width: innerWidth,
-        height: props.height - margin.top - margin.bottom,
-        x: margin.left,
-        y: margin.top,
-      });
+      .attr('width', innerWidth)
+      .attr('height', props.height - margin.top - margin.bottom)
+      .attr('x', margin.left)
+      .attr('y', margin.top);
 
     const thick = 16;
 
     handleLeft
-      .attr({
-        width: thick,
-        height: innerHeight - thick * 2,
-        x: margin.left,
-        y: margin.top + thick,
-      })
+      .attr('width', thick)
+      .attr('height', innerHeight - (thick * 2))
+      .attr('x', margin.left)
+      .attr('y', margin.top + thick)
       .call(dragLeft);
 
     handleRight
-      .attr({
-        width: thick,
-        height: innerHeight - thick * 2,
-        x: props.width - margin.right - thick,
-        y: margin.top + thick,
-      })
+      .attr('width', thick)
+      .attr('height', innerHeight - (thick * 2))
+      .attr('x', props.width - margin.right - thick)
+      .attr('y', margin.top + thick)
       .call(dragRight);
 
     handleTop
-      .attr({
-        width: innerWidth,
-        height: thick,
-        x: margin.left,
-        y: margin.top,
-      })
+      .attr('width', innerWidth)
+      .attr('height', thick)
+      .attr('x', margin.left)
+      .attr('y', margin.top)
       .call(dragTop);
 
     handleBottom
-      .attr({
-        width: innerWidth,
-        height: thick,
-        x: margin.left,
-        y: props.height - margin.bottom - thick,
-      })
+      .attr('width', innerWidth)
+      .attr('height', thick)
+      .attr('x', margin.left)
+      .attr('y', props.height - margin.bottom - thick)
       .call(dragBottom);
   },
 };

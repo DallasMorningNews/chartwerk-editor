@@ -10,3 +10,20 @@
     }
 
 }
+
+.ReactModal__Overlay{
+  z-index: 2;
+
+  .jsonTable{
+    width: 100%;
+    .jsonRow{
+
+      .jsonCell{
+        padding: 2px 5px;
+      }
+      &.jsonEven{
+        background-color: #ddd;
+      }
+    }
+  }
+}

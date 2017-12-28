@@ -80,10 +80,10 @@ export default React.createClass({
       let rowI = 0;
       while (stillValid && rowI < werk.data.length) {
         stillValid = moment(
-          werk.data[rowI][base],
+          werk.data[rowI][base].trim(),
           format,
           true).isValid();
-        rowI++;
+        rowI += 1;
       }
       return stillValid;
     }
