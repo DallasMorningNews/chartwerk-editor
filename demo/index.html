@@ -3,20 +3,20 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        
+
         <title>Chartwerk</title>
-        
+
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
 
-    	
+
 <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="css/vendor.css" media="screen" title="no title" charset="utf-8">
-<link rel="stylesheet" href="css/app.css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/editor.css" media="screen" title="no title" charset="utf-8">
 
 
     </head>
@@ -24,7 +24,7 @@
 
 
 
-    	
+
 
 <div class="header">
     <h1>
@@ -41,7 +41,7 @@
 
 
 
-      
+
 
 <div id="loading-modal">
     <div class="loading-overlay"></div>
@@ -63,22 +63,20 @@
 
 
 
-      
 <script type="text/javascript">
   window.chartwerkConfig = {
     user: '',
     static_prefix: '',
-    chart_api: 'http://localhost:25252/api/charts/',
+    chart_api: 'https://ca5hola5g7.execute-api.us-east-1.amazonaws.com/chartwerk/charts/',
     chart_id: '',
-    template_api: 'http://localhost:25252/api/templates/',
+    template_api: 'https://ca5hola5g7.execute-api.us-east-1.amazonaws.com/chartwerk/templates/',
     template_id: 'line-chart',
-    embed_api: 'http://localhost:25252/api/embeds/',
-    template_tags_api: 'http://localhost:25252/api/template-property/',
-    oembed: false,
+    template_tags_api: 'https://ca5hola5g7.execute-api.us-east-1.amazonaws.com/chartwerk/template-property/',
+    oembed: 'http://some-site.com/api/oembed/',
+    embed_src: 'http://some-site.com/js/embed.js',
   };
 </script>
-<script type="text/javascript" src="js/vendor.js"></script>
-<script type="text/javascript" src="js/app.bundle.js"></script>
+<script type="text/javascript" src="js/editor.js"></script>
 
     </body>
 </html>

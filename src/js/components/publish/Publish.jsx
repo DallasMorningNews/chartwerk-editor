@@ -372,19 +372,15 @@ export default React.createClass({
     const selector = this.state.screenshotChatter ? '#chartwerk' : '#chart';
     // Inline all styles before taking screenshot.
     inliner($('#chartwerk #chart')[0]);
-    html2canvas($(selector),
-      {
-        onrendered(canvas) {
-          const a = document.createElement('a');
-          a.href = canvas
-            .toDataURL('image/jpeg')
-            .replace('image/jpeg', 'image/octet-stream');
-          a.download = 'chartwerk.jpg';
-          a.click();
-          a.remove();
-        },
-      }
-    );
+    html2canvas(document.querySelector(selector)).then((canvas) => {
+      const a = document.createElement('a');
+      a.href = canvas
+        .toDataURL('image/jpeg')
+        .replace('image/jpeg', 'image/octet-stream');
+      a.download = 'chartwerk.jpg';
+      a.click();
+      a.remove();
+    });
   },
 
   render() {
@@ -461,8 +457,8 @@ export default React.createClass({
             onClick={this.getDimensions}
             disabled={!werk.text.title}
           >
-            <i id="save-chart-check" className="fa fa-check-circle-o" aria-hidden="true"></i>
-            <i id="save-chart-spinner" className="fa fa-circle-o-notch fa-spin" hidden></i>
+            <i id="save-chart-check" className="fa fa-check-circle-o" />
+            <i id="save-chart-spinner" className="fa fa-circle-o-notch fa-spin" hidden />
             &nbsp;Save chart
           </button>
           <div>
@@ -473,8 +469,8 @@ export default React.createClass({
                 checked={this.state.newChart}
                 onClick={() => this.setState({ newChart: !this.state.newChart })}
               />
-              <i className="fa fa-square-o"></i>
-              <i className="fa fa-check-square-o"></i>
+              <i className="fa fa-square-o" />
+              <i className="fa fa-check-square-o" />
             </label>
           </div>
         </div>
@@ -485,7 +481,7 @@ export default React.createClass({
             className="btn btn-lg"
             onClick={this.screenshot}
           >
-            <i className="fa fa-camera" aria-hidden="true"></i>
+            <i className="fa fa-camera" aria-hidden="true" />
             &nbsp;Screenshot
           </button>
           <div>
@@ -496,8 +492,8 @@ export default React.createClass({
                 checked={this.state.screenshotChatter}
                 onClick={() => this.setState({ screenshotChatter: !this.state.screenshotChatter })}
               />
-              <i className="fa fa-square-o"></i>
-              <i className="fa fa-check-square-o"></i>
+              <i className="fa fa-square-o" />
+              <i className="fa fa-check-square-o" />
             </label>
           </div>
         </div>
@@ -516,7 +512,10 @@ export default React.createClass({
           onRequestClose={() => this.setState({ templateModal: false })}
           style={modalStyles}
         >
-          <i className="fa fa-times" onClick={() => this.setState({ templateModal: false })}></i>
+          <i
+            className="fa fa-times"
+            onClick={() => this.setState({ templateModal: false })}
+          />
           <p>
             <em>Template developers can save charts as templates, which allows other
             users to more easily create similar charts.
@@ -575,8 +574,8 @@ export default React.createClass({
                   checked={this.state.newTemplate}
                   onClick={() => this.setState({ newTemplate: !this.state.newTemplate })}
                 />
-                <i className="fa fa-square-o"></i>
-                <i className="fa fa-check-square-o"></i>
+                <i className="fa fa-square-o" />
+                <i className="fa fa-check-square-o" />
               </label>
             </div>
             <button
@@ -584,8 +583,8 @@ export default React.createClass({
               disabled={!werk.template.title}
               onClick={this.saveTemplate}
             >
-              <i id="save-template-check" className="fa fa-check-circle-o" aria-hidden="true"></i>
-              <i id="save-template-spinner" className="fa fa-circle-o-notch fa-spin" hidden></i>
+              <i id="save-template-check" className="fa fa-check-circle-o" aria-hidden="true" />
+              <i id="save-template-spinner" className="fa fa-circle-o-notch fa-spin" hidden />
               &nbsp;Save Template
             </button>
           </div>

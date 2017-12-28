@@ -6,8 +6,7 @@ import 'bootstrap/js/dist/tab';
 import App from './containers/App';
 import store from './stores/';
 
-import './../scss/app.scss';
-
+import './../scss/editor.scss';
 
 
 // window.addEventListener('beforeunload', (e) => {
