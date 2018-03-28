@@ -1,6 +1,6 @@
 {
   "name": "chartwerk-editor",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "React/Redux chart template editor.",
   "main": "src/js/app.js",
   "repository": {
