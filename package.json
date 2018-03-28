@@ -1,6 +1,6 @@
 {
   "name": "chartwerk-editor",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "React/Redux chart template editor.",
   "main": "src/js/app.js",
   "repository": {
@@ -61,7 +61,7 @@
     "gulp": "^3.9.1",
     "gulp-json-srv": "^1.0.1",
     "gulp-nunjucks-render": "^2.0.0",
-    "html2canvas": "^1.0.0-alpha.6",
+    "html2canvas": "^1.0.0-alpha.10",
     "imports-loader": "^0.7.1",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.2.1",
