@@ -62,11 +62,11 @@ export default React.createClass({
       } catch (error) {
         // Try TSV
         if (localData.indexOf('	') > -1) { // eslint-disable-line no-tabs
-          this.setState({ sortedHeader: header.split('	') }); // eslint-disable-line no-tabs
+          this.setState({ sortedHeader: header.split('	').map(h => h.trim()) }); // eslint-disable-line no-tabs
           tsvConverter.fromString(localData);
         // CSV
         } else {
-          this.setState({ sortedHeader: header.split(',') });
+          this.setState({ sortedHeader: header.split(',').map(h => h.trim()) });
           csvConverter.fromString(localData);
         }
       }
@@ -85,6 +85,11 @@ export default React.createClass({
       actions.setHeaderSort(this.state.sortedHeader);
       this.setState({ format });
     }
+
+    tsvConverter.on('end_parsed', (d, jsonObj) => {
+      console.log(d);
+      console.log(jsonObj);
+    });
 
     csvConverter.on('end_parsed', parse.bind(this, 'CSV'));
     tsvConverter.on('end_parsed', parse.bind(this, 'TSV'));
