@@ -103,7 +103,7 @@ module.exports = React.createClass({
 
     return _.map(this.equalGroups(groups), d =>
       (
-        parseFloat(logScale(d)).toPrecision(2)
+        parseFloat(parseFloat(logScale(d)).toPrecision(4))
       ));
   },
 
@@ -121,7 +121,7 @@ module.exports = React.createClass({
 
     return _.map(this.equalGroups(groups), d =>
       (
-        parseFloat(sqrScale(d)).toPrecision(2)
+        parseFloat(parseFloat(sqrScale(d)).toPrecision(4))
       ));
   },
 
@@ -139,7 +139,7 @@ module.exports = React.createClass({
 
     return _.map(this.equalGroups(groups), d =>
       (
-        parseFloat(sqtScale(d)).toPrecision(2)
+        parseFloat(parseFloat(sqtScale(d)).toPrecision(4))
       ));
   },
 
@@ -150,7 +150,7 @@ module.exports = React.createClass({
    */
   jnkGroups(groups) {
     const data = this.props.data;
-    const statSeries = new geostats(data.series.map(parseFloat));  // eslint-disable-line
+    const statSeries = new geostats(data.series.map(parseFloat).filter(d => !isNaN(d)));  // eslint-disable-line
     const bounds = statSeries.getJenks(groups);
     // Remove max and min thresholds
     bounds.shift();
