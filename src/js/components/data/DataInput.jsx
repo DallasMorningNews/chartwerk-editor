@@ -86,11 +86,6 @@ export default React.createClass({
       this.setState({ format });
     }
 
-    tsvConverter.on('end_parsed', (d, jsonObj) => {
-      console.log(d);
-      console.log(jsonObj);
-    });
-
     csvConverter.on('end_parsed', parse.bind(this, 'CSV'));
     tsvConverter.on('end_parsed', parse.bind(this, 'TSV'));
 
