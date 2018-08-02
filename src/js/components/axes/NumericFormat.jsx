@@ -213,7 +213,13 @@ export default React.createClass({
    */
   setMinMax(m, e) {
     const actions = this.props.actions;
-    const value = parseFloat(e.target.value);
+    let value = parseFloat(e.target.value);
+
+    // For cases where someone types the '-' first in a negative value
+    if (isNaN(value)) {
+      value = undefined;
+    }
+
     switch (this.props.type) {
       case 'base':
         if (m === 'min') {
