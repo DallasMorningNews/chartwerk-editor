@@ -62,11 +62,11 @@ export default React.createClass({
       } catch (error) {
         // Try TSV
         if (localData.indexOf('	') > -1) { // eslint-disable-line no-tabs
-          this.setState({ sortedHeader: header.split('	') }); // eslint-disable-line no-tabs
+          this.setState({ sortedHeader: header.split('	').map(h => h.trim()) }); // eslint-disable-line no-tabs
           tsvConverter.fromString(localData);
         // CSV
         } else {
-          this.setState({ sortedHeader: header.split(',') });
+          this.setState({ sortedHeader: header.split(',').map(h => h.trim()) });
           csvConverter.fromString(localData);
         }
       }
